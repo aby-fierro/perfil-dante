@@ -103,6 +103,12 @@
             transition: all 0.2s ease;
         }
 
+        input[type="file"] {
+            background-color: #ffffff;
+            padding: 8px 10px;
+            cursor: pointer;
+        }
+
         input:focus, select:focus, textarea:focus {
             outline: none;
             border-color: var(--primary);
@@ -197,10 +203,15 @@
             <p>Registro de Perfil de Emergencia para Collar QR</p>
         </div>
 
-        <form id="formRegistro">
+        <form id="formRegistro" enctype="multipart/form-data">
             <div class="form-section">
                 <label for="nombre">Nombre de la Mascota *</label>
                 <input type="text" id="nombre" name="nombre" placeholder="Ej. Sol, Frijol, Rocky, Pancho, Snoopy" required>
+            </div>
+
+            <div class="form-section">
+                <label for="foto">📸 Fotografía de la Mascota</label>
+                <input type="file" id="foto" name="foto" accept="image/*">
             </div>
 
             <div class="form-section grid-2">
