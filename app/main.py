@@ -89,4 +89,38 @@ async def ver_mascota_registrada(request: Request, pet_id: str):
     if not mascota:
         return HTMLResponse(content="<h2>Mascota no encontrada o ID inválido</h2>", status_code=404)
     
-    return templates.TemplateResponse(request=request, name="gato.html", context={"mascota": mascota})
+    # Renderiza la ficha pública de la mascota registrada de forma dinámica
+    html_content = f"""
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{mascota['nombre']} - TagMePet</title>
+        <style>
+            body {{ font-family: sans-serif; background: #f0fdfa; padding: 20px; display: flex; justify-content: center; }}
+            .card {{ background: white; padding: 24px; border-radius: 16px; max-width: 450px; width: 100%; box-shadow: 0 4px 12px rgba(0,0,0,0.1); border: 1px solid #ccfbf1; }}
+            .header {{ background: #0d9488; color: white; padding: 12px; border-radius: 10px; text-align: center; margin-bottom: 16px; font-weight: bold; }}
+            h1 {{ margin: 0 0 10px 0; color: #0f172a; }}
+            p {{ margin: 6px 0; color: #334155; line-height: 1.4; }}
+            .label {{ font-weight: bold; color: #0f766e; }}
+            .btn {{ display: block; background: #2563eb; color: white; text-align: center; padding: 12px; border-radius: 10px; text-decoration: none; font-weight: bold; margin-top: 16px; }}
+        </style>
+    </head>
+    <body>
+        <div class="card">
+            <div class="header">🚨 Mascota Registrada en TagMePet 🚨</div>
+            <h1>🐾 {mascota['nombre']}</h1>
+            <p><span class="label">Especie:</span> {mascota['especie']}</p>
+            <p><span class="label">Raza/Tipo:</span> {mascota['raza']}</p>
+            <p><span class="label">Edad:</span> {mascota['edad']}</p>
+            <p><span class="label">📍 Colonia / Dirección:</span> {mascota['direccion']}</p>
+            <p><span class="label">⚠️ Comportamiento y Salud:</span> {mascota['notas']}</p>
+            <p><span class="label">📞 Teléfono de Contacto:</span> {mascota['contacto']}</p>
+            
+            <a href="https://wa.me/{mascota['contacto'].replace(' ', '')}" class="btn">💬 Contactar por WhatsApp</a>
+        </div>
+    </body>
+    </html>
+    """
+    return HTMLResponse(content=html_content)
