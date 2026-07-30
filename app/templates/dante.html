@@ -27,7 +27,8 @@
         .btn:hover { opacity: 0.9; }
         .btn-ws { background-color: #25D366; color: white; }
         .btn-call { background-color: #3182ce; color: white; }
-        .btn-geo { background-color: #e53e3e; color: white; width: 100%; padding: 12px; margin-top: 10px; font-size: 14px; }
+        .btn-geo { background-color: #e53e3e; color: white; width: 100%; padding: 10px; font-size: 12px; }
+        .geo-title { font-size: 11px; font-weight: 700; color: #e53e3e; text-transform: uppercase; margin-top: 15px; margin-bottom: 8px; display: block; }
     </style>
 </head>
 <body>
@@ -76,7 +77,12 @@
                     </div>
                 </div>
 
-                <button onclick="enviarUbicacion('526272792334')" class="btn btn-geo">📍 Compartir mi Ubicación GPS</button>
+                <!-- OPCIONES DE UBICACION GPS -->
+                <span class="geo-title">📍 ENVIAR MI UBICACIÓN GPS A:</span>
+                <div class="btn-row">
+                    <button onclick="enviarUbicacion('526272792334')" class="btn btn-geo">Contacto Principal</button>
+                    <button onclick="enviarUbicacion('526271310481')" class="btn btn-geo">Contacto Secundario</button>
+                </div>
             </div>
         </div>
     </div>
@@ -87,7 +93,7 @@
                 alert("Tu dispositivo no soporta geolocalización.");
                 return;
             }
-            alert("Obteniendo ubicación GPS... Por favor permite el acceso cuando el navegador te lo solicite.");
+
             navigator.geolocation.getCurrentPosition(
                 function(position) {
                     var lat = position.coords.latitude;
@@ -97,9 +103,9 @@
                     window.location.href = "https://wa.me/" + telefono + "?text=" + mensaje;
                 },
                 function(error) {
-                    alert("No se pudo obtener la ubicación GPS. Verifica que tengas el GPS activado en tu teléfono.");
+                    alert("No se pudo obtener la ubicación GPS. Verifica tener activada la ubicación en tu dispositivo.");
                 },
-                { enableHighAccuracy: true, timeout: 10000 }
+                { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
             );
         }
     </script>
