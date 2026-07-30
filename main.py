@@ -1,4 +1,5 @@
 ﻿import base64
+import os
 import sqlite3
 import uuid
 
@@ -10,8 +11,12 @@ from pydantic import BaseModel
 
 app = FastAPI(title="TagMePet")
 
-app.mount("/static", StaticFiles(directory="app/static"), name="static")
-templates = Jinja2Templates(directory="app/templates")
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+static_dir = os.path.join(BASE_DIR, "app", "static")
+templates_dir = os.path.join(BASE_DIR, "app", "templates")
+
+app.mount("/static", StaticFiles(directory=static_dir), name="static")
+templates = Jinja2Templates(directory=templates_dir)
 
 DB_FILE = "tagmepet.db"
 
@@ -39,7 +44,7 @@ def init_sqlite_db():
     columnas_extra = [
         ("contacto_secundario", "TEXT"),
         ("comportamiento", "TEXT"),
-        ("salud", "TEXT")
+        ("salud", "TEXT"),
     ]
     for col, col_type in columnas_extra:
         try:
@@ -60,14 +65,13 @@ class GPSLocation(BaseModel):
     mapa_url: str
 
 
-# --- RUTA PRINCIPAL/INICIO -> Redirige directamente al formulario de Registro ---
 @app.get("/")
 async def inicio():
     return RedirectResponse(url="/registro")
 
 
-# --- RUTAS ESPECÍFICAS PARA DANTE (para el grabado en el collar con láser) ---
 @app.get("/p/dante", response_class=HTMLResponse)
+@app.get("/p/dante/", response_class=HTMLResponse)
 @app.get("/p/dante123", response_class=HTMLResponse)
 async def ver_dante(request: Request):
     return templates.TemplateResponse(request=request, name="dante.html")
