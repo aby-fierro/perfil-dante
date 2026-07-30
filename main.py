@@ -3,7 +3,7 @@ import sqlite3
 import uuid
 
 from fastapi import FastAPI, File, Form, Request, UploadFile
-from fastapi.responses import HTMLResponse, JSONResponse
+from fastapi.responses import HTMLResponse, JSONResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel
@@ -60,7 +60,13 @@ class GPSLocation(BaseModel):
     mapa_url: str
 
 
-@app.get("/", response_class=HTMLResponse)
+# --- RUTA PRINCIPAL/INICIO -> Redirige directamente al formulario de Registro ---
+@app.get("/")
+async def inicio():
+    return RedirectResponse(url="/registro")
+
+
+# --- RUTAS ESPECÍFICAS PARA DANTE (para el grabado en el collar con láser) ---
 @app.get("/p/dante", response_class=HTMLResponse)
 @app.get("/p/dante123", response_class=HTMLResponse)
 async def ver_dante(request: Request):
