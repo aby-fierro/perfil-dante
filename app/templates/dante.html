@@ -3,195 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mascota Perdida - Dante</title>
+    <title>Perfil de Dante - TagMePet</title>
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
-        body { background-color: #f4f6f8; color: #2d3748; line-height: 1.6; padding: 20px; min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+        body { font-family: system-ui, -apple-system, sans-serif; background: #f0fdf4; margin: 0; padding: 20px; display: flex; justify-content: center; }
+        .card { background: white; max-width: 440px; width: 100%; border-radius: 20px; padding: 22px; box-shadow: 0 10px 25px rgba(0,0,0,0.06); border: 1px solid #e2e8f0; }
         
-        .card-container { width: 100%; max-width: 900px; background: #ffffff; border-radius: 18px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.06); border: 1px solid #e2e8f0; }
-        .alert-header { background-color: #e53e3e; color: #ffffff; text-align: center; padding: 12px; font-weight: 700; font-size: 1.1rem; letter-spacing: 0.5px; text-transform: uppercase; }
-        
-        .content-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 28px; padding: 32px; align-items: start; }
-        
-        .info-section { display: flex; flex-direction: column; align-items: flex-start; }
-        .profile-header { display: flex; align-items: center; gap: 18px; margin-bottom: 20px; width: 100%; }
-        .pet-avatar { width: 130px; height: 130px; border-radius: 50%; object-fit: cover; border: 4px solid #edf2f7; box-shadow: 0 4px 10px rgba(0,0,0,0.08); flex-shrink: 0; }
-        .pet-title { flex-grow: 1; }
-        .pet-name { font-size: 2.2rem; color: #1a202c; font-weight: 800; line-height: 1.1; margin-bottom: 6px; }
-        .address-badge { background-color: #feebc8; color: #742a2a; font-weight: 600; padding: 6px 12px; border-radius: 8px; font-size: 0.85rem; display: inline-block; line-height: 1.3; }
-        
-        .detail-box { width: 100%; background: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #3182ce; padding: 14px 16px; border-radius: 8px; margin-bottom: 14px; text-align: left; }
-        .detail-box.health { border-left-color: #38a169; }
-        .detail-box h3 { font-size: 0.85rem; color: #4a5568; text-transform: uppercase; margin-bottom: 6px; letter-spacing: 0.5px; font-weight: 700; }
-        .detail-box p { font-size: 0.95rem; color: #2d3748; }
+        .banner-estado { background: #ef4444; color: white; text-align: center; padding: 12px; border-radius: 12px; font-weight: bold; font-size: 1.05rem; margin-bottom: 16px; }
 
-        .action-section { background: #faf5ff; border: 1px solid #e9d8fd; padding: 24px; border-radius: 14px; height: 100%; display: flex; flex-direction: column; justify-content: center; }
-        .action-title { font-size: 1.15rem; color: #44337a; font-weight: 700; margin-bottom: 6px; text-align: center; }
-        .action-subtitle { font-size: 0.88rem; color: #6b46c1; margin-bottom: 16px; text-align: center; }
-        
-        .contact-group { margin-bottom: 16px; width: 100%; }
-        .contact-label { font-size: 0.82rem; font-weight: 700; color: #4a5568; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
-        .button-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+        .foto-container { width: 100%; height: 280px; border-radius: 16px; overflow: hidden; background: #f0f0f0; margin-bottom: 16px; }
+        .foto { width: 100%; height: 100%; object-fit: cover; }
 
-        .btn { display: flex; align-items: center; justify-content: center; padding: 12px 10px; border-radius: 10px; text-decoration: none; font-weight: 700; font-size: 0.88rem; border: none; cursor: pointer; transition: background-color 0.2s ease; color: #ffffff; width: 100%; box-shadow: 0 2px 6px rgba(0,0,0,0.05); text-align: center; }
-        .btn-whatsapp { background-color: #25d366; }
-        .btn-whatsapp:hover { background-color: #20ba5a; }
-        .btn-call { background-color: #3182ce; }
-        .btn-call:hover { background-color: #2b6cb0; }
-        .btn-gps { background-color: #e53e3e; margin-top: 10px; padding: 14px; font-size: 0.95rem; }
-        .btn-gps:hover { background-color: #c53030; }
-        
-        #status { margin-top: 10px; font-weight: 600; font-size: 0.85rem; text-align: center; min-height: 20px; }
+        .nombre-container { font-size: 1.8rem; font-weight: bold; color: #0f172a; margin-bottom: 12px; text-align: center; }
 
-        /* Opciones desplegables para enviar GPS */
-        .gps-options { display: none; margin-top: 10px; background: #ffffff; border: 1px solid #e53e3e; border-radius: 10px; padding: 12px; }
-        .gps-options p { font-size: 0.85rem; font-weight: 700; color: #c53030; margin-bottom: 8px; text-align: center; }
+        .section-box { background: #f8fafc; border-radius: 12px; padding: 12px 14px; margin-bottom: 12px; border: 1px solid #f1f5f9; }
+        .label { color: #dc2626; font-weight: bold; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 4px; display: flex; align-items: center; gap: 6px; }
+        .value { color: #334155; font-size: 0.98rem; line-height: 1.4; }
 
-        @media (max-width: 768px) {
-            .content-grid { grid-template-columns: 1fr; padding: 20px; gap: 20px; }
-            .profile-header { flex-direction: column; text-align: center; }
-            .pet-avatar { width: 150px; height: 150px; }
-            .info-section { align-items: center; }
-            .detail-box { text-align: left; }
-            .action-section { padding: 20px; }
-        }
+        .contact-group { margin-top: 18px; border-top: 2px dashed #e2e8f0; padding-top: 16px; }
+        .contact-title { font-weight: bold; color: #0f172a; font-size: 0.95rem; margin-bottom: 8px; }
+
+        .btn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
+        .btn { display: flex; align-items: center; justify-content: center; gap: 6px; padding: 12px; border-radius: 10px; text-decoration: none; font-weight: bold; font-size: 0.95rem; color: white; transition: transform 0.1s; }
+        .btn:active { transform: scale(0.97); }
+
+        .btn-wa { background: #25d366; }
+        .btn-call { background: #ef4444; }
+
+        .btn-gps { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; background: #0284c7; color: white; padding: 14px 0; border-radius: 12px; text-decoration: none; font-weight: bold; font-size: 1rem; margin-top: 10px; box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25); cursor: pointer; border: none; }
+        .btn-gps:active { transform: scale(0.98); }
     </style>
 </head>
 <body>
-
-<div class="card-container">
-    <div class="alert-header">🚨 Mascota Fuera de Casa 🚨</div>
-    
-    <div class="content-grid">
-        <div class="info-section">
-            <div class="profile-header">
-                <img src="/static/dante.jpg" alt="Foto de Dante" class="pet-avatar" onerror="this.src='https://via.placeholder.com/150?text=Foto+Dante'">
-                <div class="pet-title">
-                    <h1 class="pet-name">Dante</h1>
-                    <div class="address-badge">📍 Vive en: Col. Tierra y Libertad, Anenecuilco #11</div>
-                </div>
-            </div>
-
-            <div class="detail-box">
-                <h3>Comportamiento</h3>
-                <p>Dante es un chihuahua marrón con blanco. Es un perro de casa, no suele salirse ni escaparse solo. No es agresivo como un pitbull pero tampoco es totalmente manso; si alguien desconocido se le acerca muy de golpe puede llegar a ladrarle por desconfianza o susto. Trátalo con calma.</p>
-            </div>
-
-            <div class="detail-box health">
-                <h3>Salud y Estado</h3>
-                <p>Está un poco gordito pero bien cuidado, cuenta con todas sus vacunas al día.</p>
-            </div>
+    <div class="card">
+        <div class="banner-estado">
+            🚨 Mascota Fuera de Casa 🚨
         </div>
 
-        <div class="action-section">
-            <div class="action-title">¿Lo encontraste o lo viste?</div>
-            <div class="action-subtitle">Comunícate directamente con su familia:</div>
+        <div class="foto-container">
+            <img src="/static/default.jpg" class="foto" alt="Dante">
+        </div>
+        
+        <div class="nombre-container">
+            Dante
+        </div>
 
-            <!-- Contacto 1: Principal -->
-            <div class="contact-group">
-                <div class="contact-label">Contacto Principal:</div>
-                <div class="button-row">
-                    <a href="https://wa.me/526272792334?text=Hola,%20tengo%20informaci%C3%B3n%20sobre%20Dante" class="btn btn-whatsapp" target="_blank">
-                        💬 WhatsApp
-                    </a>
-                    <a href="tel:6272792334" class="btn btn-call">
-                        📞 Llamar
-                    </a>
-                </div>
+        <div class="section-box">
+            <div class="label">🐾 ESPECIE Y RAZA</div>
+            <div class="value">Perro (Chihuahua)</div>
+        </div>
+
+        <div class="section-box">
+            <div class="label">📍 VIVE EN</div>
+            <div class="value">Col. Tierra y Libertad, Anenecuilco #11</div>
+        </div>
+
+        <div class="section-box">
+            <div class="label">🐕 COMPORTAMIENTO</div>
+            <div class="value">Dante es un chihuahua marrón con blanco. Es un perro de casa, no suele salirse ni escaparse solo. No es agresivo pero si alguien desconocido se le acerca muy de golpe puede ladrar por desconfianza. Trátalo con calma.</div>
+        </div>
+
+        <div class="section-box">
+            <div class="label">💉 SALUD Y ESTADO</div>
+            <div class="value">Está un poco gordito pero bien cuidado, cuenta con todas sus vacunas al día.</div>
+        </div>
+
+        <div class="contact-group">
+            <div style="text-align: center; font-weight: bold; margin-bottom: 12px; color: #0f172a;">
+                ¿Lo encontraste o lo viste?<br>
+                <span style="font-size: 0.85rem; font-weight: normal; color: #64748b;">Comunícate directamente con su familia:</span>
             </div>
 
-            <!-- Contacto 2: Secundario -->
-            <div class="contact-group">
-                <div class="contact-label">Contacto Secundario:</div>
-                <div class="button-row">
-                    <a href="https://wa.me/526271310481?text=Hola,%20tengo%20informaci%C3%B3n%20sobre%20Dante" class="btn btn-whatsapp" target="_blank">
-                        💬 WhatsApp
-                    </a>
-                    <a href="tel:6271310481" class="btn btn-call">
-                        📞 Llamar
-                    </a>
-                </div>
+            <div class="contact-title">Contacto Principal:</div>
+            <div class="btn-grid">
+                <a href="https://wa.me/526271234567?text=Hola,%20tengo%20información%20sobre%20Dante" target="_blank" class="btn btn-wa">💬 WhatsApp</a>
+                <a href="tel:6271234567" class="btn btn-call">📞 Llamar</a>
             </div>
-            
-            <button onclick="enviarUbicacionYNotificar()" class="btn btn-gps">
+
+            <button onclick="compartirUbicacion()" class="btn-gps">
                 📍 Compartir mi Ubicación GPS
             </button>
-
-            <div id="status"></div>
-
-            <!-- Menú que aparece una vez obtenida la ubicación -->
-            <div id="gps-options" class="gps-options">
-                <p>Enviar ubicación por WhatsApp a:</p>
-                <div class="button-row">
-                    <button id="btn-send-main" class="btn btn-whatsapp">Contacto Principal</button>
-                    <button id="btn-send-sec" class="btn btn-whatsapp">Contacto Secundario</button>
-                </div>
-            </div>
         </div>
     </div>
-</div>
 
-<script>
-async function enviarUbicacionYNotificar() {
-    const status = document.getElementById("status");
-    const gpsOptions = document.getElementById("gps-options");
-    
-    status.style.color = "#3182ce";
-    status.innerText = "Obteniendo coordenadas GPS...";
-    gpsOptions.style.display = "none";
-
-    if (!navigator.geolocation) {
-        status.style.color = "#e53e3e";
-        status.innerText = "Tu navegador no soporta geolocalización.";
-        return;
-    }
-
-    navigator.geolocation.getCurrentPosition(
-        async (position) => {
-            const lat = position.coords.latitude;
-            const lon = position.coords.longitude;
-            const mapsUrl = `https://www.google.com/maps?q=${lat},${lon}`;
-            
-            status.innerText = "Registrando alerta GPS...";
-
-            try {
-                await fetch('/api/notificar-gps', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ latitud: lat, longitud: lon, mapa_url: mapsUrl })
+    <script>
+        function compartirUbicacion() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    const lat = position.coords.latitude;
+                    const lon = position.coords.longitude;
+                    const mapUrl = https://maps.google.com/?q=,;
+                    const mensaje = encodeURIComponent(¡Hola! Encontré/vi a Dante en esta ubicación: );
+                    window.open(https://wa.me/526271234567?text=, '_blank');
+                }, function(error) {
+                    alert("No se pudo obtener la ubicación. Por favor activa el GPS de tu teléfono.");
                 });
-            } catch (err) {
-                console.log("Error al notificar al servidor:", err);
-            }
-
-            status.style.color = "#38a169";
-            status.innerText = "Ubicación obtenida. Elige a quién enviarla:";
-
-            const mensaje = encodeURIComponent(`¡Hola! Encontré o vi a Dante. Mi ubicación actual es: ${mapsUrl}`);
-            
-            // Asignar los enlaces dinámicamente a los botones
-            document.getElementById("btn-send-main").onclick = () => {
-                window.open(`https://wa.me/526272792334?text=${mensaje}`, "_blank");
-            };
-            document.getElementById("btn-send-sec").onclick = () => {
-                window.open(`https://wa.me/526271310481?text=${mensaje}`, "_blank");
-            };
-
-            // Mostrar los botones de elección
-            gpsOptions.style.display = "block";
-        },
-        (error) => {
-            status.style.color = "#e53e3e";
-            if(error.code === error.PERMISSION_DENIED) {
-                status.innerText = "Por favor autoriza el permiso de ubicación en tu teléfono o navegador.";
             } else {
-                status.innerText = "No se pudo obtener la ubicación.";
+                alert("Tu navegador no soporta geolocalización.");
             }
-        },
-        { enableHighAccuracy: true, timeout: 10000 }
-    );
-}
-</script>
-
+        }
+    </script>
 </body>
 </html>
