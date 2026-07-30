@@ -1,4 +1,4 @@
-锘縤mport base64
+import base64
 import os
 import sqlite3
 import uuid
@@ -82,14 +82,14 @@ async def notificar_gps(datos: GPSLocation):
     destinatarios = ["abygailfierro191@gmail.com", "friskpapa@gmail.com"]
     cuerpo = f"""
     Hola,
-    Alguien ha presionado el bot贸n de compartir ubicaci贸n en la placa de Dante.
+    Alguien ha presionado el bot髇 de compartir ubicaci髇 en la placa de Dante.
     Coordenadas: {datos.latitud}, {datos.longitud}
     Ver en Google Maps: {datos.mapa_url}
     """
     try:
         for correo in destinatarios:
-            print(f"NOTIFICACI脫N PARA: {correo}\n{cuerpo}")
-        return {"status": "ok", "mensaje": "Notificaci贸n enviada"}
+            print(f"NOTIFICACI覰 PARA: {correo}\n{cuerpo}")
+        return {"status": "ok", "mensaje": "Notificaci髇 enviada"}
     except Exception as e:
         return JSONResponse(
             {"status": "error", "detalle": str(e)}, status_code=500
@@ -119,7 +119,7 @@ async def registrar_mascota(
 ):
     codigo_unico = f"{nombre.lower().replace(' ', '')}-{str(uuid.uuid4())[:4]}"
 
-    final_foto_src = "/static/default.jpg"
+    final_foto_src = ""
     if foto and foto.filename:
         contenido = await foto.read()
         if len(contenido) > 0:
@@ -166,7 +166,7 @@ async def registrar_mascota(
 
     return JSONResponse({
         "status": "ok",
-        "mensaje": "Mascota registrada con 茅xito",
+        "mensaje": "Mascota registrada con 閤ito",
         "pet_id": codigo_unico,
         "url": f"/p/{codigo_unico}",
     })
@@ -186,7 +186,7 @@ async def ver_mascota_registrada(request: Request, pet_id: str):
         conn.close()
     except Exception as e:
         return HTMLResponse(
-            content=f"<h2>Error de conexi贸n con la base de datos: {str(e)}</h2>",
+            content=f"<h2>Error de conexi髇 con la base de datos: {str(e)}</h2>",
             status_code=500,
         )
 
