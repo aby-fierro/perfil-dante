@@ -1,0 +1,130 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil de {{ mascota.nombre }} - TagMePet</title>
+    <style>
+        body { font-family: system-ui, -apple-system, sans-serif; background: #f0fdf4; margin: 0; padding: 20px; display: flex; justify-content: center; }
+        .card { background: white; max-width: 440px; width: 100%; border-radius: 20px; padding: 22px; box-shadow: 0 10px 25px rgba(0,0,0,0.06); border: 1px solid #e2e8f0; }
+        
+        .banner-estado { background: #22c55e; color: white; text-align: center; padding: 12px; border-radius: 12px; font-weight: bold; font-size: 1.05rem; margin-bottom: 16px; }
+        .banner-estado.perdido { background: #ef4444; }
+
+        .foto-container { width: 100%; height: 280px; border-radius: 16px; overflow: hidden; background: #f0f0f0; margin-bottom: 16px; }
+        .foto { width: 100%; height: 100%; object-fit: cover; }
+
+        .nombre-container { font-size: 1.8rem; font-weight: bold; color: #0f172a; margin-bottom: 12px; text-align: center; }
+
+        .section-box { background: #f8fafc; border-radius: 12px; padding: 12px 14px; margin-bottom: 12px; border: 1px solid #f1f5f9; }
+        .label { color: #16a34a; font-weight: bold; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 4px; display: flex; align-items: center; gap: 6px; }
+        .label.perdido { color: #dc2626; }
+        .value { color: #334155; font-size: 0.98rem; line-height: 1.4; }
+
+        .contact-group { margin-top: 18px; border-top: 2px dashed #e2e8f0; padding-top: 16px; }
+        .contact-title { font-weight: bold; color: #0f172a; font-size: 0.95rem; margin-bottom: 8px; }
+
+        .btn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
+        .btn { display: flex; align-items: center; justify-content: center; gap: 6px; padding: 12px; border-radius: 10px; text-decoration: none; font-weight: bold; font-size: 0.95rem; color: white; transition: transform 0.1s; }
+        .btn:active { transform: scale(0.97); }
+
+        .btn-wa { background: #25d366; }
+        .btn-call { background: #22c55e; }
+        .btn-call.perdido { background: #ef4444; }
+
+        .btn-gps { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; background: #0284c7; color: white; padding: 14px 0; border-radius: 12px; text-decoration: none; font-weight: bold; font-size: 1rem; margin-top: 10px; box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25); cursor: pointer; border: none; }
+        .btn-gps:active { transform: scale(0.98); }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="banner-estado {{ 'perdido' if es_perdido else '' }}">
+            🐾 {{ '🚨 MASCOTA PERDIDA - REQUIERE AYUDA' if es_perdido else 'Estado Seguro / Registrado en TagMePet' }}
+        </div>
+
+        <div class="foto-container">
+            <img src="{{ mascota.foto_url }}" class="foto" alt="{{ mascota.nombre }}">
+        </div>
+        
+        <div class="nombre-container">
+            {{ mascota.nombre }}
+        </div>
+
+        <div class="section-box">
+            <div class="label {{ 'perdido' if es_perdido else '' }}">🐾 ESPECIE Y RAZA</div>
+            <div class="value">{{ mascota.especie }} {% if mascota.raza %}({{ mascota.raza }}){% endif %} - {{ mascota.edad }}</div>
+        </div>
+
+        {% if mascota.direccion %}
+        <div class="section-box">
+            <div class="label {{ 'perdido' if es_perdido else '' }}">📍 VIVE EN</div>
+            <div class="value">{{ mascota.direccion }}</div>
+        </div>
+        {% endif %}
+
+        {% if mascota.comportamiento %}
+        <div class="section-box">
+            <div class="label {{ 'perdido' if es_perdido else '' }}">🐕 COMPORTAMIENTO</div>
+            <div class="value">{{ mascota.comportamiento }}</div>
+        </div>
+        {% endif %}
+
+        {% if mascota.salud %}
+        <div class="section-box">
+            <div class="label {{ 'perdido' if es_perdido else '' }}">💉 SALUD Y ESTADO</div>
+            <div class="value">{{ mascota.salud }}</div>
+        </div>
+        {% endif %}
+
+        {% if mascota.notas %}
+        <div class="section-box">
+            <div class="label {{ 'perdido' if es_perdido else '' }}">⚠️ NOTAS ADICIONALES</div>
+            <div class="value">{{ mascota.notas }}</div>
+        </div>
+        {% endif %}
+
+        <div class="contact-group">
+            <div style="text-align: center; font-weight: bold; margin-bottom: 12px; color: #0f172a;">
+                ¿Lo encontraste o lo viste?<br>
+                <span style="font-size: 0.85rem; font-weight: normal; color: #64748b;">Comunícate directamente con su familia:</span>
+            </div>
+
+            <div class="contact-title">Contacto Principal:</div>
+            <div class="btn-grid">
+                <a href="https://wa.me/52{{ tel1_limpio }}?text=Hola,%20tengo%20información%20sobre%20{{ mascota.nombre }}" target="_blank" class="btn btn-wa">💬 WhatsApp</a>
+                <a href="tel:{{ tel1_limpio }}" class="btn btn-call {{ 'perdido' if es_perdido else '' }}">📞 Llamar</a>
+            </div>
+
+            {% if tel2_limpio %}
+            <div class="contact-title">Contacto Secundario:</div>
+            <div class="btn-grid">
+                <a href="https://wa.me/52{{ tel2_limpio }}?text=Hola,%20tengo%20información%20sobre%20{{ mascota.nombre }}" target="_blank" class="btn btn-wa">💬 WhatsApp</a>
+                <a href="tel:{{ tel2_limpio }}" class="btn btn-call {{ 'perdido' if es_perdido else '' }}">📞 Llamar</a>
+            </div>
+            {% endif %}
+
+            <button onclick="compartirUbicacion()" class="btn-gps">
+                📍 Compartir mi Ubicación GPS
+            </button>
+        </div>
+    </div>
+
+    <script>
+        function compartirUbicacion() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    const lat = position.coords.latitude;
+                    const lon = position.coords.longitude;
+                    const mapUrl = `https://maps.google.com/?q=${lat},${lon}`;
+                    const mensaje = encodeURIComponent(`¡Hola! Encontré/vi a {{ mascota.nombre }} en esta ubicación: ${mapUrl}`);
+                    window.open(`https://wa.me/52{{ tel1_limpio }}?text=${mensaje}`, '_blank');
+                }, function(error) {
+                    alert("No se pudo obtener la ubicación. Por favor activa el GPS de tu teléfono.");
+                });
+            } else {
+                alert("Tu navegador no soporta geolocalización.");
+            }
+        }
+    </script>
+</body>
+</html>

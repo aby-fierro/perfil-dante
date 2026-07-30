@@ -38,11 +38,23 @@
         .card-container {
             background: var(--card);
             width: 100%;
-            max-width: 500px;
+            max-width: 520px;
             border-radius: 20px;
             box-shadow: 0 10px 25px -5px rgba(13, 148, 136, 0.15);
             border: 1px solid var(--border);
             overflow: hidden;
+            transition: max-width 0.3s ease;
+        }
+
+        @media (min-width: 850px) {
+            .card-container {
+                max-width: 800px;
+            }
+            .form-grid-pc {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 20px;
+            }
         }
 
         .header-tag {
@@ -118,7 +130,7 @@
 
         textarea {
             resize: vertical;
-            min-height: 85px;
+            min-height: 75px;
         }
 
         .btn-submit {
@@ -204,53 +216,82 @@
         </div>
 
         <form id="formRegistro" enctype="multipart/form-data">
-            <div class="form-section">
-                <label for="nombre">Nombre de la Mascota *</label>
-                <input type="text" id="nombre" name="nombre" placeholder="Ej. Sol, Frijol, Rocky, Pancho, Snoopy" required>
-            </div>
-
-            <div class="form-section">
-                <label for="foto">📸 Fotografía de la Mascota</label>
-                <input type="file" id="foto" name="foto" accept="image/*">
-            </div>
-
-            <div class="form-section grid-2">
+            <div class="form-grid-pc">
                 <div>
-                    <label for="especie">Especie *</label>
-                    <select id="especie" name="especie" required>
-                        <option value="Perro">🐶 Perro</option>
-                        <option value="Gato">🐱 Gato</option>
-                        <option value="Hurón">🦦 Hurón</option>
-                        <option value="Ave">🦜 Ave</option>
-                        <option value="Conejo">🐰 Conejo</option>
-                        <option value="Otra">🐾 Otra</option>
-                    </select>
-                </div>
-                <div>
-                    <label for="raza">Raza / Tipo</label>
-                    <input type="text" id="raza" name="raza" placeholder="Ej. Mestizo, Schnauzer, Siamés">
-                </div>
-            </div>
+                    <div class="form-section">
+                        <label for="nombre">Nombre de la Mascota *</label>
+                        <input type="text" id="nombre" name="nombre" placeholder="Ej. Sol, Frijol, Pepito" required>
+                    </div>
 
-            <div class="form-section grid-2">
-                <div>
-                    <label for="edad">Edad</label>
-                    <input type="text" id="edad" name="edad" placeholder="Ej. 3 años, 8 meses">
-                </div>
-                <div>
-                    <label for="contacto">Teléfono de Contacto *</label>
-                    <input type="tel" id="contacto" name="contacto" placeholder="Ej. 627 123 4567" required>
-                </div>
-            </div>
+                    <div class="form-section">
+                        <label for="foto">📸 Fotografía (JPG, PNG o Galería)</label>
+                        <input type="file" id="foto" name="foto" accept="image/*">
+                    </div>
 
-            <div class="form-section">
-                <label for="direccion">📍 Colonia / Dirección Aproximada</label>
-                <input type="text" id="direccion" name="direccion" placeholder="Ej. Col. Tierra y Libertad, Anenecuilco #11">
-            </div>
+                    <div class="form-section">
+                        <label for="estado">🔴 Estado Actual de la Mascota</label>
+                        <select id="estado" name="estado">
+                            <option value="seguro" selected>🏡 A salvo en casa (Preventivo)</option>
+                            <option value="perdido">🚨 ¡PERDIDO! (Alerta Roja)</option>
+                        </select>
+                    </div>
 
-            <div class="form-section">
-                <label for="notas">⚠️ Comportamiento y Salud</label>
-                <textarea id="notas" name="notas" placeholder="Ej. Es perro de casa, desconfiado con desconocidos, cuenta con vacunas al día..."></textarea>
+                    <div class="form-section grid-2">
+                        <div>
+                            <label for="especie">Especie *</label>
+                            <select id="especie" name="especie" required>
+                                <option value="Perro">🐶 Perro</option>
+                                <option value="Gato">🐱 Gato</option>
+                                <option value="Hurón">🦦 Hurón</option>
+                                <option value="Ave">🦜 Ave</option>
+                                <option value="Conejo">🐰 Conejo</option>
+                                <option value="Otra">🐾 Otra</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="raza">Raza / Tipo</label>
+                            <input type="text" id="raza" name="raza" placeholder="Ej. Mestizo, Schnauzer">
+                        </div>
+                    </div>
+
+                    <div class="form-section grid-2">
+                        <div>
+                            <label for="edad">Edad</label>
+                            <input type="text" id="edad" name="edad" placeholder="Ej. 2 años">
+                        </div>
+                        <div>
+                            <label for="contacto">Teléfono Principal *</label>
+                            <input type="tel" id="contacto" name="contacto" placeholder="627-102-3456" required>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <label for="contacto_secundario">📞 Teléfono Secundario (Opcional)</label>
+                        <input type="tel" id="contacto_secundario" name="contacto_secundario" placeholder="627-139-2655">
+                    </div>
+                </div>
+
+                <div>
+                    <div class="form-section">
+                        <label for="direccion">📍 Colonia / Dirección Aproximada</label>
+                        <input type="text" id="direccion" name="direccion" placeholder="Ej. Col. Centro, Parral">
+                    </div>
+
+                    <div class="form-section">
+                        <label for="comportamiento">🐕 Comportamiento / Temperamento</label>
+                        <textarea id="comportamiento" name="comportamiento" placeholder="Ej. Desconfiado con desconocidos, acercarse con calma..."></textarea>
+                    </div>
+
+                    <div class="form-section">
+                        <label for="salud">💉 Salud y Estado Físico</label>
+                        <textarea id="salud" name="salud" placeholder="Ej. Esquema de vacunas completo, alérgico a cierto alimento..."></textarea>
+                    </div>
+
+                    <div class="form-section">
+                        <label for="notas">⚠️ Notas Adicionales</label>
+                        <input type="text" id="notas" name="notas" placeholder="Ej. Responde al nombre o a silbidos">
+                    </div>
+                </div>
             </div>
 
             <button type="submit" class="btn-submit">
@@ -285,7 +326,7 @@
                 document.getElementById('resultadoCard').style.display = 'block';
                 document.getElementById('resultadoCard').scrollIntoView({ behavior: 'smooth' });
             } else {
-                alert('Ocurrió un error al registrar. Intenta de nuevo.');
+                alert('Ocurrió un error al registrar en la base de datos: ' + (data.detalle || 'Intenta de nuevo.'));
             }
         });
     </script>
