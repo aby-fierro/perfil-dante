@@ -55,28 +55,28 @@
             <div class="value">{{ mascota.especie }} {% if mascota.raza %}({{ mascota.raza }}){% endif %} - {{ mascota.edad }}</div>
         </div>
 
-        {% if mascota.direccion %}
+        {% if mascota.direccion and mascota.direccion.strip() %}
         <div class="section-box">
             <div class="label {{ 'perdido' if es_perdido else '' }}">📍 VIVE EN</div>
             <div class="value">{{ mascota.direccion }}</div>
         </div>
         {% endif %}
 
-        {% if mascota.comportamiento %}
+        {% if mascota.comportamiento and mascota.comportamiento.strip() %}
         <div class="section-box">
             <div class="label {{ 'perdido' if es_perdido else '' }}">🐕 COMPORTAMIENTO</div>
             <div class="value">{{ mascota.comportamiento }}</div>
         </div>
         {% endif %}
 
-        {% if mascota.salud %}
+        {% if mascota.salud and mascota.salud.strip() %}
         <div class="section-box">
             <div class="label {{ 'perdido' if es_perdido else '' }}">💉 SALUD Y ESTADO</div>
             <div class="value">{{ mascota.salud }}</div>
         </div>
         {% endif %}
 
-        {% if mascota.notas %}
+        {% if mascota.notas and mascota.notas.strip() %}
         <div class="section-box">
             <div class="label {{ 'perdido' if es_perdido else '' }}">⚠️ NOTAS ADICIONALES</div>
             <div class="value">{{ mascota.notas }}</div>
@@ -95,7 +95,7 @@
                 <a href="tel:{{ tel1_limpio }}" class="btn btn-call {{ 'perdido' if es_perdido else '' }}">📞 Llamar</a>
             </div>
 
-            {% if tel2_limpio %}
+            {% if tel2_limpio and tel2_limpio.strip() %}
             <div class="contact-title">Contacto Secundario:</div>
             <div class="btn-grid">
                 <a href="https://wa.me/52{{ tel2_limpio }}?text=Hola,%20tengo%20información%20sobre%20{{ mascota.nombre }}" target="_blank" class="btn btn-wa">💬 WhatsApp</a>
@@ -115,9 +115,9 @@
                 navigator.geolocation.getCurrentPosition(function(position) {
                     const lat = position.coords.latitude;
                     const lon = position.coords.longitude;
-                    const mapUrl = `https://maps.google.com/?q=${lat},${lon}`;
-                    const mensaje = encodeURIComponent(`¡Hola! Encontré/vi a {{ mascota.nombre }} en esta ubicación: ${mapUrl}`);
-                    window.open(`https://wa.me/52{{ tel1_limpio }}?text=${mensaje}`, '_blank');
+                    const mapUrl = https://maps.google.com/?q=,;
+                    const mensaje = encodeURIComponent(¡Hola! Encontré/vi a {{ mascota.nombre }} en esta ubicación: );
+                    window.open(https://wa.me/52{{ tel1_limpio }}?text=, '_blank');
                 }, function(error) {
                     alert("No se pudo obtener la ubicación. Por favor activa el GPS de tu teléfono.");
                 });

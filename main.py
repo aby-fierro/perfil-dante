@@ -1,4 +1,4 @@
-import base64
+﻿import base64
 import sqlite3
 import uuid
 
@@ -36,7 +36,6 @@ def init_sqlite_db():
             foto_url TEXT
         )
     """)
-    # Añadir columnas si la BD fue creada con la versión previa
     columnas_extra = [
         ("contacto_secundario", "TEXT"),
         ("comportamiento", "TEXT"),
@@ -61,9 +60,6 @@ class GPSLocation(BaseModel):
     mapa_url: str
 
 
-# ==========================================
-# RUTAS DE DANTE (INTACTAS)
-# ==========================================
 @app.get("/", response_class=HTMLResponse)
 @app.get("/p/dante", response_class=HTMLResponse)
 @app.get("/p/dante123", response_class=HTMLResponse)
@@ -90,9 +86,6 @@ async def notificar_gps(datos: GPSLocation):
         )
 
 
-# ==========================================
-# RUTAS DE REGISTRO Y PERFIL DINÁMICO
-# ==========================================
 @app.get("/registro", response_class=HTMLResponse)
 async def ver_registro(request: Request):
     return templates.TemplateResponse(request=request, name="registro.html")
@@ -109,7 +102,7 @@ async def registrar_mascota(
     direccion: str = Form("No proporcionada"),
     comportamiento: str = Form(""),
     salud: str = Form(""),
-    notas: str = Form("Sin notas adicionales"),
+    notas: str = Form(""),
     estado: str = Form("seguro"),
     foto: UploadFile = File(None),
     foto_url: str = Form(""),
@@ -140,17 +133,17 @@ async def registrar_mascota(
             query,
             (
                 codigo_unico,
-                nombre,
-                especie,
-                raza,
-                edad,
-                contacto,
-                contacto_secundario,
-                direccion,
-                comportamiento,
-                salud,
-                notas,
-                estado.lower(),
+                nombre.strip(),
+                especie.strip(),
+                raza.strip(),
+                edad.strip(),
+                contacto.strip(),
+                contacto_secundario.strip(),
+                direccion.strip(),
+                comportamiento.strip(),
+                salud.strip(),
+                notas.strip(),
+                estado.lower().strip(),
                 final_foto_src,
             ),
         )
