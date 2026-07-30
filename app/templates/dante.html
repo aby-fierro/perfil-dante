@@ -3,52 +3,99 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfil de Dante - TagMePet</title>
+    <title>Mascota Perdida - Dante</title>
     <style>
-        body { font-family: Arial, sans-serif; background-color: #f4f6f9; margin: 0; padding: 20px; text-align: center; }
-        .card { background: white; max-width: 400px; margin: auto; padding: 20px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        h1 { color: #2c3e50; margin-bottom: 5px; }
-        p { color: #555; }
-        .btn { display: block; width: 100%; padding: 12px; margin: 10px 0; border-radius: 8px; text-decoration: none; font-weight: bold; color: white; border: none; cursor: pointer; box-sizing: border-box; font-size: 16px; }
-        .btn-ws { background-color: #25D366; }
-        .btn-call { background-color: #007bff; }
-        .btn-geo { background-color: #ff9800; }
+        * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #f0f2f5; margin: 0; padding: 20px 10px; display: flex; justify-content: center; }
+        .card { background: white; max-width: 800px; width: 100%; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+        .banner { background-color: #d9534f; color: white; text-align: center; padding: 12px; font-weight: bold; letter-spacing: 1px; font-size: 14px; text-transform: uppercase; }
+        .content { padding: 24px; display: flex; flex-wrap: wrap; gap: 24px; }
+        .left-col { flex: 1; min-width: 280px; }
+        .right-col { flex: 1; min-width: 280px; background: #fafafa; padding: 20px; border-radius: 12px; border: 1px solid #eee; }
+        .profile-header { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
+        .avatar { width: 90px; height: 90px; border-radius: 50%; object-fit: cover; border: 3px solid #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+        .pet-name { margin: 0; font-size: 28px; color: #2c3e50; font-weight: 800; }
+        .address { font-size: 13px; color: #666; margin-top: 4px; background: #fff8e7; padding: 6px 10px; border-radius: 6px; border-left: 3px solid #f0ad4e; }
+        .section-title { font-size: 11px; font-weight: 700; color: #7f8c8d; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+        .info-box { margin-bottom: 18px; padding-left: 12px; border-left: 3px solid #3498db; }
+        .info-box.health { border-left-color: #2ecc71; }
+        .info-box p { margin: 0; font-size: 13px; color: #444; line-height: 1.5; }
+        .contact-group { margin-bottom: 16px; }
+        .contact-label { font-size: 11px; font-weight: 700; color: #555; text-transform: uppercase; margin-bottom: 8px; display: block; }
+        .btn-row { display: flex; gap: 8px; margin-bottom: 10px; }
+        .btn { flex: 1; padding: 10px 14px; border-radius: 8px; text-decoration: none; font-size: 13px; font-weight: 600; text-align: center; border: none; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 6px; transition: opacity 0.2s; }
+        .btn:hover { opacity: 0.9; }
+        .btn-ws { background-color: #25D366; color: white; }
+        .btn-call { background-color: #3182ce; color: white; }
+        .btn-geo { background-color: #e53e3e; color: white; width: 100%; padding: 12px; margin-top: 10px; font-size: 14px; }
     </style>
 </head>
 <body>
     <div class="card">
-        <h1>¡Hola, soy Dante! 🐾</h1>
-        <p>Si me encontraste, por favor contacta a mi familia:</p>
+        <div class="banner">🚨 MASCOTA FUERA DE CASA 🚨</div>
+        <div class="content">
+            <div class="left-col">
+                <div class="profile-header">
+                    <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?w=300" alt="Dante" class="avatar">
+                    <div>
+                        <h1 class="pet-name">Dante</h1>
+                        <div class="address">📍 Vive en: Col. Tierra y Libertad, Anenecuilco #11</div>
+                    </div>
+                </div>
 
-        <!-- Botones de WhatsApp Directos -->
-        <a href="https://wa.me/5216561234567?text=Hola,%20encontré%20a%20Dante!" class="btn btn-ws" target="_blank">💬 Enviar WhatsApp</a>
-        <a href="tel:5216561234567" class="btn btn-call">📞 Llamar al Dueño</a>
+                <div class="section-title">COMPORTAMIENTO</div>
+                <div class="info-box">
+                    <p>Dante es un chihuahua marrón con blanco. Es un perro de casa, no suele salirse ni escaparse solo. No es agresivo como un pitbull pero tampoco es totalmente manso; si alguien desconocido se le acerca muy de golpe puede llegar a ladrarle por desconfianza o susto. Trátalo con calma.</p>
+                </div>
 
-        <!-- Botón de GPS -->
-        <button onclick="compartirUbicacion('5216561234567')" class="btn btn-geo">📍 Compartir mi Ubicación GPS</button>
+                <div class="section-title">SALUD Y ESTADO</div>
+                <div class="info-box health">
+                    <p>Está un poco gordito pero bien cuidado, cuenta con todas sus vacunas al día.</p>
+                </div>
+            </div>
+
+            <div class="right-col">
+                <h3 style="margin-top:0; color:#2c3e50; font-size:16px;">¿Lo encontraste o lo viste?</h3>
+                <p style="font-size:12px; color:#666; margin-bottom:16px;">Comunícate directamente con su familia:</p>
+
+                <div class="contact-group">
+                    <span class="contact-label">CONTACTO PRINCIPAL:</span>
+                    <div class="btn-row">
+                        <a href="https://wa.me/5216561234567?text=Hola,%20encontr%C3%A9%20a%20Dante" target="_blank" class="btn btn-ws">💬 WhatsApp</a>
+                        <a href="tel:5216561234567" class="btn btn-call">📞 Llamar</a>
+                    </div>
+                </div>
+
+                <div class="contact-group">
+                    <span class="contact-label">CONTACTO SECUNDARIO:</span>
+                    <div class="btn-row">
+                        <a href="https://wa.me/5216561234567?text=Hola,%20encontr%C3%A9%20a%20Dante" target="_blank" class="btn btn-ws">💬 WhatsApp</a>
+                        <a href="tel:5216561234567" class="btn btn-call">📞 Llamar</a>
+                    </div>
+                </div>
+
+                <button onclick="enviarUbicacion('5216561234567')" class="btn btn-geo">📍 Compartir mi Ubicación GPS</button>
+            </div>
+        </div>
     </div>
 
     <script>
-        function compartirUbicacion(telefono) {
+        function enviarUbicacion(telefono) {
             if (!navigator.geolocation) {
                 alert("Tu dispositivo no soporta geolocalización.");
                 return;
             }
-
-            alert("Obteniendo ubicación GPS... Por favor acepta los permisos si tu teléfono los solicita.");
-
+            alert("Obteniendo ubicación GPS... Por favor permite el acceso cuando el navegador te lo solicite.");
             navigator.geolocation.getCurrentPosition(
                 function(position) {
                     var lat = position.coords.latitude;
                     var lon = position.coords.longitude;
                     var urlMaps = "https://maps.google.com/?q=" + lat + "," + lon;
-                    var mensaje = encodeURIComponent("¡Hola! Encontré a Dante en esta ubicación exacta: " + urlMaps);
-                    
-                    // Abre WhatsApp directamente con las coordenadas
+                    var mensaje = encodeURIComponent("¡Hola! Encontré a Dante en esta ubicación: " + urlMaps);
                     window.location.href = "https://wa.me/" + telefono + "?text=" + mensaje;
                 },
                 function(error) {
-                    alert("No se pudo obtener la ubicación. Revisa que tengas el GPS activado y le hayas dado permiso al navegador.");
+                    alert("No se pudo obtener la ubicación GPS. Verifica que tengas el GPS activado en tu teléfono.");
                 },
                 { enableHighAccuracy: true, timeout: 10000 }
             );
