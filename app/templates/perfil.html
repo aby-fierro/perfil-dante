@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+Ôªø<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -162,11 +162,11 @@
     <div class="container">
         {% if es_perdido %}
             <div class="alert-banner perdido">
-                ?? MASCOTA REPORTADA COMO PERDIDA ??
+                üö® MASCOTA REPORTADA COMO PERDIDA üö®
             </div>
         {% else %}
             <div class="alert-banner seguro">
-                ?? Mascota con hogar y protegida
+                üè° Mascota con hogar y protegida
             </div>
         {% endif %}
 
@@ -177,33 +177,33 @@
         <div class="content">
             <div class="header">
                 <h1 class="pet-name">{{ mascota.nombre }}</h1>
-                <p class="pet-subtitle">{{ mascota.especie }}{% if mascota.raza and mascota.raza != "No especificada" %} ï {{ mascota.raza }}{% endif %}{% if mascota.edad and mascota.edad != "No especificada" %} ï {{ mascota.edad }}{% endif %}</p>
+                <p class="pet-subtitle">{{ mascota.especie }}{% if mascota.raza and mascota.raza != "No especificada" %} ‚Ä¢ {{ mascota.raza }}{% endif %}{% if mascota.edad and mascota.edad != "No especificada" %} ‚Ä¢ {{ mascota.edad }}{% endif %}</p>
             </div>
 
             {% if mascota.direccion and mascota.direccion != "No proporcionada" %}
             <div class="info-group">
-                <div class="info-label">?? DirecciÛn / Colonia</div>
+                <div class="info-label">üìç Direcci√≥n / Colonia</div>
                 <div class="info-value">{{ mascota.direccion }}</div>
             </div>
             {% endif %}
 
             {% if mascota.comportamiento and mascota.comportamiento != "" %}
             <div class="info-group">
-                <div class="info-label">?? Comportamiento</div>
+                <div class="info-label">üêï Comportamiento</div>
                 <div class="info-value">{{ mascota.comportamiento }}</div>
             </div>
             {% endif %}
 
             {% if mascota.salud and mascota.salud != "" %}
             <div class="info-group">
-                <div class="info-label">?? Salud y Estado FÌsico</div>
+                <div class="info-label">üíâ Salud y Estado F√≠sico</div>
                 <div class="info-value">{{ mascota.salud }}</div>
             </div>
             {% endif %}
 
             {% if mascota.notas and mascota.notas != "" %}
             <div class="info-group">
-                <div class="info-label">?? Notas Adicionales</div>
+                <div class="info-label">‚ö†Ô∏è Notas Adicionales</div>
                 <div class="info-value">{{ mascota.notas }}</div>
             </div>
             {% endif %}
@@ -211,26 +211,26 @@
             <div class="actions">
                 {% if tel1_limpio %}
                 <a href="tel:{{ tel1_limpio }}" class="btn btn-call">
-                    ?? Llamar al DueÒo
+                    üìû Llamar al Due√±o
                 </a>
                 {% endif %}
 
                 {% if tel2_limpio %}
                 <a href="tel:{{ tel2_limpio }}" class="btn btn-call-sec">
-                    ?? Llamar a Contacto Secundario
+                    üìû Llamar a Contacto Secundario
                 </a>
                 {% endif %}
 
                 {% if tel1_limpio %}
                 <button onclick="compartirUbicacion()" class="btn btn-gps">
-                    ?? Compartir mi UbicaciÛn por WhatsApp
+                    üìç Compartir mi Ubicaci√≥n por WhatsApp
                 </button>
                 {% endif %}
             </div>
         </div>
 
         <div class="footer">
-            TagMePet - IdentificaciÛn Inteligente para Mascotas
+            TagMePet - Identificaci√≥n Inteligente para Mascotas
         </div>
     </div>
 
@@ -241,14 +241,14 @@
                     const lat = position.coords.latitude;
                     const lon = position.coords.longitude;
                     const mapUrl = "https://maps.google.com/?q=" + lat + "," + lon;
-                    const texto = "°Hola! EncontrÈ/vi a " + "{{ mascota.nombre }}" + " en esta ubicaciÛn: " + mapUrl;
+                    const texto = "¬°Hola! Encontr√©/vi a " + "{{ mascota.nombre }}" + " en esta ubicaci√≥n: " + mapUrl;
                     const mensaje = encodeURIComponent(texto);
                     window.open("https://wa.me/52" + "{{ tel1_limpio }}" + "?text=" + mensaje, "_blank");
                 }, function(error) {
-                    alert("No se pudo obtener la ubicaciÛn. Por favor activa el GPS de tu telÈfono.");
+                    alert("No se pudo obtener la ubicaci√≥n. Por favor activa el GPS de tu tel√©fono.");
                 });
             } else {
-                alert("Tu navegador no soporta geolocalizaciÛn.");
+                alert("Tu navegador no soporta geolocalizaci√≥n.");
             }
         }
     </script>

@@ -1,4 +1,4 @@
-import base64
+ï»¿import base64
 import os
 import sqlite3
 import uuid
@@ -82,14 +82,14 @@ async def notificar_gps(datos: GPSLocation):
     destinatarios = ["abygailfierro191@gmail.com", "friskpapa@gmail.com"]
     cuerpo = f"""
     Hola,
-    Alguien ha presionado el botón de compartir ubicación en la placa de Dante.
+    Alguien ha presionado el boton de compartir ubicacion en la placa de Dante.
     Coordenadas: {datos.latitud}, {datos.longitud}
     Ver en Google Maps: {datos.mapa_url}
     """
     try:
         for correo in destinatarios:
-            print(f"NOTIFICACIÓN PARA: {correo}\n{cuerpo}")
-        return {"status": "ok", "mensaje": "Notificación enviada"}
+            print(f"NOTIFICACION PARA: {correo}\n{cuerpo}")
+        return {"status": "ok", "mensaje": "Notificacion enviada"}
     except Exception as e:
         return JSONResponse(
             {"status": "error", "detalle": str(e)}, status_code=500
@@ -166,7 +166,7 @@ async def registrar_mascota(
 
     return JSONResponse({
         "status": "ok",
-        "mensaje": "Mascota registrada con éxito",
+        "mensaje": "Mascota registrada con exito",
         "pet_id": codigo_unico,
         "url": f"/p/{codigo_unico}",
     })
@@ -186,7 +186,7 @@ async def ver_mascota_registrada(request: Request, pet_id: str):
         conn.close()
     except Exception as e:
         return HTMLResponse(
-            content=f"<h2>Error de conexión con la base de datos: {str(e)}</h2>",
+            content=f"<h2>Error de conexion con la base de datos: {str(e)}</h2>",
             status_code=500,
         )
 
