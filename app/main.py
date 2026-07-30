@@ -1,4 +1,4 @@
-﻿from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
@@ -14,7 +14,7 @@ async def read_root():
 
 @app.get("/registro", response_class=HTMLResponse)
 async def registro(request: Request):
-    return templates.TemplateResponse("registro.html", {"request": request})
+    return templates.TemplateResponse(request=request, name="registro.html")
 
 @app.get("/p/dante", response_class=HTMLResponse)
 async def perfil_dante(request: Request):
