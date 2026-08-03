@@ -1,4 +1,4 @@
-import base64
+ï»¿import base64
 import os
 import sqlite3
 import uuid
@@ -21,11 +21,11 @@ templates = Jinja2Templates(directory=templates_dir)
 DB_FILE = os.path.join(BASE_DIR, "tagmepet.db")
 
 print("=" * 50)
-print("DIAGNÓSTICO SQLITE")
+print("DIAGNOSTICO SQLITE")
 print("BASE_DIR:", BASE_DIR)
 print("Directorio actual:", os.getcwd())
 print("Ruta absoluta DB:", os.path.abspath(DB_FILE))
-print("¿Existe antes de conectar?:", os.path.exists(DB_FILE))
+print("Existe antes de conectar:", os.path.exists(DB_FILE))
 print("=" * 50)
 
 
@@ -65,9 +65,9 @@ def init_sqlite_db():
 
     print("=" * 50)
     print("Base creada o abierta correctamente.")
-    print("¿Existe despues de crearla?:", os.path.exists(DB_FILE))
+    print("Existe despues de crearla:", os.path.exists(DB_FILE))
     if os.path.exists(DB_FILE):
-        print("Tamaño:", os.path.getsize(DB_FILE), "bytes")
+        print("Tamano:", os.path.getsize(DB_FILE), "bytes")
     print("=" * 50)
 
 
