@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -42,11 +42,9 @@
             🐾 {{ '🚨 MASCOTA PERDIDA - REQUIERE AYUDA' if es_perdido else 'Estado Seguro / Registrado en TagMePet' }}
         </div>
 
-        {% if mascota.foto_url and mascota.foto_url.strip() %}
         <div class="foto-container">
             <img src="{{ mascota.foto_url }}" class="foto" alt="{{ mascota.nombre }}">
         </div>
-        {% endif %}
         
         <div class="nombre-container">
             {{ mascota.nombre }}
@@ -54,10 +52,10 @@
 
         <div class="section-box">
             <div class="label {{ 'perdido' if es_perdido else '' }}">🐾 ESPECIE Y RAZA</div>
-            <div class="value">{{ mascota.especie }} {% if mascota.raza and mascota.raza != "No especificada" %}({{ mascota.raza }}){% endif %} {% if mascota.edad and mascota.edad != "No especificada" %}• {{ mascota.edad }}{% endif %}</div>
+            <div class="value">{{ mascota.especie }} {% if mascota.raza %}({{ mascota.raza }}){% endif %} - {{ mascota.edad }}</div>
         </div>
 
-        {% if mascota.direccion and mascota.direccion.strip() and mascota.direccion != "No proporcionada" %}
+        {% if mascota.direccion and mascota.direccion.strip() %}
         <div class="section-box">
             <div class="label {{ 'perdido' if es_perdido else '' }}">📍 VIVE EN</div>
             <div class="value">{{ mascota.direccion }}</div>
@@ -93,20 +91,20 @@
 
             <div class="contact-title">Contacto Principal:</div>
             <div class="btn-grid">
-                <a href="https://wa.me/52{{ tel1_limpio }}?text=Hola,%20tengo%20informaci%C3%B3n%20sobre%20{{ mascota.nombre }}" target="_blank" class="btn btn-wa">💬 WhatsApp</a>
+                <a href="https://wa.me/52{{ tel1_limpio }}?text=Hola,%20tengo%20información%20sobre%20{{ mascota.nombre }}" target="_blank" class="btn btn-wa">💬 WhatsApp</a>
                 <a href="tel:{{ tel1_limpio }}" class="btn btn-call {{ 'perdido' if es_perdido else '' }}">📞 Llamar</a>
             </div>
 
             {% if tel2_limpio and tel2_limpio.strip() %}
             <div class="contact-title">Contacto Secundario:</div>
             <div class="btn-grid">
-                <a href="https://wa.me/52{{ tel2_limpio }}?text=Hola,%20tengo%20informaci%C3%B3n%20sobre%20{{ mascota.nombre }}" target="_blank" class="btn btn-wa">💬 WhatsApp</a>
+                <a href="https://wa.me/52{{ tel2_limpio }}?text=Hola,%20tengo%20información%20sobre%20{{ mascota.nombre }}" target="_blank" class="btn btn-wa">💬 WhatsApp</a>
                 <a href="tel:{{ tel2_limpio }}" class="btn btn-call {{ 'perdido' if es_perdido else '' }}">📞 Llamar</a>
             </div>
             {% endif %}
 
             <button onclick="compartirUbicacion()" class="btn-gps">
-                📍 Compartir mi Ubicación por WhatsApp
+                📍 Compartir mi Ubicación GPS
             </button>
         </div>
     </div>
@@ -117,24 +115,7 @@
                 navigator.geolocation.getCurrentPosition(function(position) {
                     const lat = position.coords.latitude;
                     const lon = position.coords.longitude;
-                    const mapUrl = "https://maps.google.com/?q=" + lat + "," + lon;
-                    
-                    // Notificar al servidor en segundo plano
-                    fetch("/api/notificar-gps", {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({ latitud: lat, longitud: lon, mapa_url: mapUrl })
-                    }).catch(function(e) { console.log(e); });
-
-                    // Abrir WhatsApp con la ubicación
-                    const texto = "¡Hola! Encontré o vi a {{ mascota.nombre }} en esta ubicación: " + mapUrl;
-                    const mensaje = encodeURIComponent(texto);
-                    window.open("https://wa.me/52{{ tel1_limpio }}?text=" + mensaje, "_blank");
-                }, function(error) {
-                    alert("Por favor activa el permiso de ubicación en tu navegador para compartir las coordenadas.");
                 });
-            } else {
-                alert("Tu navegador no soporta geolocalización.");
             }
         }
     </script>

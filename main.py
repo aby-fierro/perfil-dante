@@ -4,7 +4,7 @@ import sqlite3
 import uuid
 
 from fastapi import FastAPI, File, Form, Request, UploadFile
-from fastapi.responses import HTMLResponse, JSONResponse, RedirectResponse
+from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel
@@ -229,3 +229,8 @@ async def ver_mascota_registrada(request: Request, pet_id: str):
             "es_perdido": es_perdido,
         },
     )
+
+
+@app.get("/descargar-db")
+async def descargar_base_de_datos():
+    return FileResponse(DB_FILE, filename="tagmepet.db")
