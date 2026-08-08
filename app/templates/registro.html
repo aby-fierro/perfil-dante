@@ -1,9 +1,11 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TagMePet - Alta de Collar Inteligente</title>
+    <!-- Librería ligera para generar QR en JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <style>
         :root {
             --primary: #0d9488;
@@ -190,6 +192,17 @@
             font-weight: 600;
         }
 
+        .qr-box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 16px;
+            background: #ffffff;
+            border-radius: 12px;
+            border: 1px solid #cbd5e1;
+            margin: 14px 0;
+        }
+
         .btn-view {
             display: inline-block;
             width: 100%;
@@ -295,13 +308,19 @@
             </div>
 
             <button type="submit" class="btn-submit">
-                ✨ Generar Ficha y Perfil Único
+                ✨ Generar Ficha y Código QR
             </button>
         </form>
 
         <div id="resultadoCard">
-            <h3>¡Ficha creada exitosamente! 🎉</h3>
-            <p>Este es el enlace directo guardado para el collar de la mascota:</p>
+            <h3>¡Ficha y Código QR Creados Exitosamente! 🎉</h3>
+            <p>Escanea o descarga este código QR para colocarlo en el collar:</p>
+            
+            <div class="qr-box">
+                <div id="qrCodeContainer"></div>
+            </div>
+
+            <p>Enlace web asignado:</p>
             <div class="url-display" id="urlGenerada">https://...</div>
             <a href="#" id="btnAbrirPerfil" target="_blank" class="btn-view">📱 Abrir Ficha Individual</a>
         </div>
@@ -321,6 +340,20 @@
 
             if (data.status === 'ok') {
                 const fullUrl = window.location.origin + data.url;
+                
+                // Limpiar QR previo si existía
+                document.getElementById('qrCodeContainer').innerHTML = '';
+                
+                // Generar el nuevo QR
+                new QRCode(document.getElementById('qrCodeContainer'), {
+                    text: fullUrl,
+                    width: 180,
+                    height: 180,
+                    colorDark: "#0d9488",
+                    colorLight: "#ffffff",
+                    correctLevel: QRCode.CorrectLevel.H
+                });
+
                 document.getElementById('urlGenerada').textContent = fullUrl;
                 document.getElementById('btnAbrirPerfil').href = data.url;
                 document.getElementById('resultadoCard').style.display = 'block';
