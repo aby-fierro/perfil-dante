@@ -92,6 +92,12 @@ async def ver_dante(request: Request):
     return templates.TemplateResponse(request=request, name="dante.html")
 
 
+@app.get("/p/boris", response_class=HTMLResponse)
+@app.get("/p/boris/", response_class=HTMLResponse)
+async def ver_boris(request: Request):
+    return templates.TemplateResponse(request=request, name="gato.html")
+
+
 @app.post("/api/notificar-gps")
 async def notificar_gps(datos: GPSLocation):
     destinatarios = ["abygailfierro191@gmail.com", "friskpapa@gmail.com"]
