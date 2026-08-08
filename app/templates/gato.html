@@ -1,1 +1,103 @@
-<h1>Perfil del Gato</h1>
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil de Boris - TagMePet</title>
+    <style>
+        * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #f0fdf4; margin: 0; padding: 20px 10px; display: flex; justify-content: center; }
+        .card { background: white; max-width: 800px; width: 100%; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+        .banner { background-color: #22c55e; color: white; text-align: center; padding: 12px; font-weight: bold; letter-spacing: 1px; font-size: 14px; text-transform: uppercase; }
+        .content { padding: 24px; display: flex; flex-wrap: wrap; gap: 24px; }
+        .left-col { flex: 1; min-width: 280px; }
+        .right-col { flex: 1; min-width: 280px; background: #fafafa; padding: 20px; border-radius: 12px; border: 1px solid #eee; }
+        .profile-header { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
+        .avatar { width: 90px; height: 90px; border-radius: 50%; object-fit: cover; border: 3px solid #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+        .pet-name { margin: 0; font-size: 28px; color: #2c3e50; font-weight: 800; }
+        .address { font-size: 13px; color: #15803d; margin-top: 4px; background: #f0fdf4; padding: 6px 10px; border-radius: 6px; border-left: 3px solid #22c55e; }
+        .section-title { font-size: 11px; font-weight: 700; color: #16a34a; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+        .info-box { margin-bottom: 18px; padding-left: 12px; border-left: 3px solid #3498db; }
+        .info-box.health { border-left-color: #2ecc71; }
+        .info-box p { margin: 0; font-size: 13px; color: #444; line-height: 1.5; }
+        .contact-group { margin-bottom: 16px; }
+        .contact-label { font-size: 11px; font-weight: 700; color: #555; text-transform: uppercase; margin-bottom: 8px; display: block; }
+        .btn-row { display: flex; gap: 8px; margin-bottom: 10px; }
+        .btn { flex: 1; padding: 10px 14px; border-radius: 8px; text-decoration: none; font-size: 13px; font-weight: 600; text-align: center; border: none; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 6px; transition: opacity 0.2s; }
+        .btn:hover { opacity: 0.9; }
+        .btn-ws { background-color: #25D366; color: white; }
+        .btn-call { background-color: #22c55e; color: white; }
+        .btn-geo { background-color: #0284c7; color: white; width: 100%; padding: 10px; font-size: 12px; }
+        .geo-title { font-size: 11px; font-weight: 700; color: #0284c7; text-transform: uppercase; margin-top: 15px; margin-bottom: 8px; display: block; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="banner">🐾 ESTADO SEGURO / REGISTRADO EN TAGMEPET 🐾</div>
+        <div class="content">
+            <div class="left-col">
+                <div class="profile-header">
+                    <img src="/static/boris.jpg" alt="Boris" class="avatar">
+                    <div>
+                        <h1 class="pet-name">Boris</h1>
+                        <div class="address">📍 Estado: Mascotas TagMePet</div>
+                    </div>
+                </div>
+
+                <div class="section-title">COMPORTAMIENTO</div>
+                <div class="info-box">
+                    <p>Boris es un gatito muy asustadizo y desconfiado con gente que no conoce. Si intenta meterle la mano alguien extraño, puede ponerse a la defensiva o asustarse más. Lo ideal es no acorralarlo, mantener la distancia y comunicarse de inmediato con su dueño.</p>
+                </div>
+
+                <div class="section-title">SALUD Y ESTADO</div>
+                <div class="info-box health">
+                    <p>Tiene excelente salud, esquemas de vacunación al día y está esterilizado.</p>
+                </div>
+            </div>
+
+            <div class="right-col">
+                <h3 style="margin-top:0; color:#2c3e50; font-size:16px;">¿Lo encontraste o lo viste?</h3>
+                <p style="font-size:12px; color:#666; margin-bottom:16px;">Comunícate directamente con su familia:</p>
+
+                <!-- CONTACTO PRINCIPAL -->
+                <div class="contact-group">
+                    <span class="contact-label">CONTACTO DIRECTO:</span>
+                    <div class="btn-row">
+                        <a href="https://wa.me/526145463055?text=Hola,%20tengo%20informaci%C3%B3n%20sobre%20Boris" target="_blank" class="btn btn-ws">💬 WhatsApp</a>
+                        <a href="tel:6145463055" class="btn btn-call">📞 Llamar</a>
+                    </div>
+                </div>
+
+                <!-- OPCIONES DE UBICACION GPS -->
+                <span class="geo-title">📍 ENVIAR MI UBICACIÓN GPS A:</span>
+                <div class="btn-row">
+                    <button onclick="enviarUbicacion('526145463055')" class="btn btn-geo">Contacto Directo</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function enviarUbicacion(telefono) {
+            if (!navigator.geolocation) {
+                alert("Tu dispositivo no soporta geolocalización.");
+                return;
+            }
+
+            navigator.geolocation.getCurrentPosition(
+                function(position) {
+                    var lat = position.coords.latitude;
+                    var lon = position.coords.longitude;
+                    var urlMaps = "https://www.google.com/maps?q=" + lat + "," + lon;
+                    var mensaje = encodeURIComponent("¡Hola! Encontré o vi a Boris. Mi ubicación actual es: " + urlMaps);
+                    window.location.href = "https://wa.me/" + telefono + "?text=" + mensaje;
+                },
+                function(error) {
+                    alert("No se pudo obtener la ubicación GPS. Verifica tener activada la ubicación en tu dispositivo.");
+                },
+                { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+            );
+        }
+    </script>
+</body>
+</html>
