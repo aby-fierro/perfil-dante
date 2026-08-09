@@ -92,36 +92,42 @@
 
                 <!-- CONTACTO PRINCIPAL -->
                 {% if mascota.contacto %}
+                {% set tel1_clean = mascota.contacto | replace(' ', '') | replace('-', '') | replace('(', '') | replace(')', '') %}
                 <div class="contact-group">
-                    <span class="contact-label">CONTACTO PRINCIPAL ({{ mascota.contacto }}):</span>
+                    <span class="contact-label">CONTACTO PRINCIPAL:</span>
                     <div class="btn-row">
-                        <a href="https://wa.me/52{{ mascota.contacto }}?text=Hola,%20tengo%20informaci%C3%B3n%20sobre%20{{ mascota.nombre }}" target="_blank" class="btn btn-ws">💬 WhatsApp</a>
-                        <a href="tel:{{ mascota.contacto }}" class="btn btn-call">📞 Llamar</a>
+                        <a href="https://wa.me/52{{ tel1_clean }}?text=Hola,%20tengo%20informaci%C3%B3n%20sobre%20{{ mascota.nombre }}" target="_blank" class="btn btn-ws">💬 WhatsApp</a>
+                        <a href="tel:{{ tel1_clean }}" class="btn btn-call">📞 Llamar</a>
                     </div>
                 </div>
                 {% endif %}
 
                 <!-- CONTACTO SECUNDARIO -->
                 {% if mascota.contacto_secundario %}
+                {% set tel2_clean = mascota.contacto_secundario | replace(' ', '') | replace('-', '') | replace('(', '') | replace(')', '') %}
                 <div class="contact-group">
-                    <span class="contact-label">CONTACTO SECUNDARIO ({{ mascota.contacto_secundario }}):</span>
+                    <span class="contact-label">CONTACTO SECUNDARIO:</span>
                     <div class="btn-row">
-                        <a href="https://wa.me/52{{ mascota.contacto_secundario }}?text=Hola,%20tengo%20informaci%C3%B3n%20sobre%20{{ mascota.nombre }}" target="_blank" class="btn btn-ws">💬 WhatsApp</a>
-                        <a href="tel:{{ mascota.contacto_secundario }}" class="btn btn-call">📞 Llamar</a>
+                        <a href="https://wa.me/52{{ tel2_clean }}?text=Hola,%20tengo%20informaci%C3%B3n%20sobre%20{{ mascota.nombre }}" target="_blank" class="btn btn-ws">💬 WhatsApp</a>
+                        <a href="tel:{{ tel2_clean }}" class="btn btn-call">📞 Llamar</a>
                     </div>
                 </div>
                 {% endif %}
 
                 <!-- OPCIONES DE UBICACION GPS -->
+                {% if mascota.contacto or mascota.contacto_secundario %}
                 <span class="geo-title">📍 ENVIAR MI UBICACIÓN GPS A:</span>
                 <div class="btn-row" style="flex-direction: column;">
                     {% if mascota.contacto %}
-                        <button onclick="enviarUbicacion('52{{ mascota.contacto }}', '{{ mascota.nombre }}')" class="btn btn-geo">Contacto Principal</button>
+                        {% set tel1_clean = mascota.contacto | replace(' ', '') | replace('-', '') | replace('(', '') | replace(')', '') %}
+                        <button onclick="enviarUbicacion('52{{ tel1_clean }}', '{{ mascota.nombre }}')" class="btn btn-geo">Contacto Principal</button>
                     {% endif %}
                     {% if mascota.contacto_secundario %}
-                        <button onclick="enviarUbicacion('52{{ mascota.contacto_secundario }}', '{{ mascota.nombre }}')" class="btn btn-geo">Contacto Secundario</button>
+                        {% set tel2_clean = mascota.contacto_secundario | replace(' ', '') | replace('-', '') | replace('(', '') | replace(')', '') %}
+                        <button onclick="enviarUbicacion('52{{ tel2_clean }}', '{{ mascota.nombre }}')" class="btn btn-geo">Contacto Secundario</button>
                     {% endif %}
                 </div>
+                {% endif %}
             </div>
         </div>
     </div>
