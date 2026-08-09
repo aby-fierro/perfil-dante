@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfil de Mascota - TagMePet</title>
+    <title>Perfil de Mascota - {{ mascota.nombre }} | TagMePet</title>
     <style>
         * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body { background-color: #f0f2f5; margin: 0; padding: 20px 10px; display: flex; justify-content: center; }
@@ -11,19 +11,21 @@
         
         /* ESTADOS DE BANNERS */
         .banner { color: white; text-align: center; padding: 12px; font-weight: bold; letter-spacing: 1px; font-size: 14px; text-transform: uppercase; }
-        .banner.perdido { background-color: #ef4444; } /* Rojo brillante */
-        .banner.seguro { background-color: #22c55e; } /* Verde brillante */
+        .banner.perdido { background-color: #ef4444; } /* Rojo brillante si está perdido */
+        .banner.seguro { background-color: #22c55e; } /* Verde brillante si está seguro */
 
         .content { padding: 24px; display: flex; flex-wrap: wrap; gap: 24px; }
         .left-col { flex: 1; min-width: 280px; }
         .right-col { flex: 1; min-width: 280px; background: #fafafa; padding: 20px; border-radius: 12px; border: 1px solid #eee; }
         .profile-header { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
-        .avatar { width: 90px; height: 90px; border-radius: 50%; object-fit: cover; border: 3px solid #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+        .avatar { width: 90px; height: 90px; border-radius: 50%; object-fit: cover; border: 3px solid #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.15); background-color: #e2e8f0; }
         .pet-name { margin: 0; font-size: 28px; color: #2c3e50; font-weight: 800; }
-        .address { font-size: 13px; color: #666; margin-top: 4px; background: #fff8e7; padding: 6px 10px; border-radius: 6px; border-left: 3px solid #f0ad4e; }
-        .section-title { font-size: 11px; font-weight: 700; color: #7f8c8d; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
-        .info-box { margin-bottom: 18px; padding-left: 12px; border-left: 3px solid #3498db; }
+        .pet-subtitle { font-size: 14px; color: #64748b; margin-top: 2px; font-weight: 600; }
+        .address { font-size: 13px; color: #666; margin-top: 8px; background: #fff8e7; padding: 6px 10px; border-radius: 6px; border-left: 3px solid #f0ad4e; }
+        .section-title { font-size: 11px; font-weight: 700; color: #7f8c8d; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; margin-top: 14px; }
+        .info-box { margin-bottom: 12px; padding-left: 12px; border-left: 3px solid #3498db; }
         .info-box.health { border-left-color: #2ecc71; }
+        .info-box.notes { border-left-color: #f39c12; }
         .info-box p { margin: 0; font-size: 13px; color: #444; line-height: 1.5; }
         .contact-group { margin-bottom: 16px; }
         .contact-label { font-size: 11px; font-weight: 700; color: #555; text-transform: uppercase; margin-bottom: 8px; display: block; }
@@ -38,29 +40,50 @@
 </head>
 <body>
     <div class="card">
-        <!-- Banner dinámico dependiendo del estado de la mascota -->
-        <div class="banner perdido" id="bannerEstado">🚨 MASCOTA PERDIDA - REQUIERE AYUDA 🚨</div>
-        <!-- Si estuviera a salvo se usa: <div class="banner seguro">🐾 ESTADO SEGURO / REGISTRADO EN TAG ME PET 🐾</div> -->
+        <!-- Banner dinámico dependiendo del estado -->
+        {% if mascota.estado == 'perdido' %}
+            <div class="banner perdido">🚨 MASCOTA PERDIDA - REQUIERE AYUDA 🚨</div>
+        {% else %}
+            <div class="banner seguro">🐾 A SALVO EN CASA / REGISTRADO EN TAG ME PET 🐾</div>
+        {% endif %}
 
         <div class="content">
             <div class="left-col">
                 <div class="profile-header">
-                    <img src="/static/foto_mascota.jpg" alt="Mascota" class="avatar">
+                    {% if mascota.foto_url %}
+                        <img src="{{ mascota.foto_url }}" alt="{{ mascota.nombre }}" class="avatar">
+                    {% else %}
+                        <img src="https://via.placeholder.com/150?text=Sin+Foto" alt="{{ mascota.nombre }}" class="avatar">
+                    {% endif %}
                     <div>
-                        <h1 class="pet-name">Nombre Mascota</h1>
-                        <div class="address">📍 Vive en: Col. Tierra y Libertad, Anenecuilco #11</div>
+                        <h1 class="pet-name">{{ mascota.nombre }}</h1>
+                        <div class="pet-subtitle">{{ mascota.especie }}{% if mascota.raza %} • {{ mascota.raza }}{% endif %}{% if mascota.edad %} • {{ mascota.edad }}{% endif %}</div>
+                        {% if mascota.direccion %}
+                            <div class="address">📍 Vive en: {{ mascota.direccion }}</div>
+                        {% endif %}
                     </div>
                 </div>
 
-                <div class="section-title">COMPORTAMIENTO</div>
-                <div class="info-box">
-                    <p>Información de comportamiento sobre la mascota...</p>
-                </div>
+                {% if mascota.comportamiento %}
+                    <div class="section-title">COMPORTAMIENTO</div>
+                    <div class="info-box">
+                        <p>{{ mascota.comportamiento }}</p>
+                    </div>
+                {% endif %}
 
-                <div class="section-title">SALUD Y ESTADO</div>
-                <div class="info-box health">
-                    <p>Información médica y de salud de la mascota...</p>
-                </div>
+                {% if mascota.salud %}
+                    <div class="section-title">SALUD Y ESTADO</div>
+                    <div class="info-box health">
+                        <p>{{ mascota.salud }}</p>
+                    </div>
+                {% endif %}
+
+                {% if mascota.notas %}
+                    <div class="section-title">NOTAS ADICIONALES</div>
+                    <div class="info-box notes">
+                        <p>{{ mascota.notas }}</p>
+                    </div>
+                {% endif %}
             </div>
 
             <div class="right-col">
@@ -68,35 +91,43 @@
                 <p style="font-size:12px; color:#666; margin-bottom:16px;">Comunícate directamente con su familia:</p>
 
                 <!-- CONTACTO PRINCIPAL -->
+                {% if mascota.contacto %}
                 <div class="contact-group">
-                    <span class="contact-label">CONTACTO PRINCIPAL:</span>
+                    <span class="contact-label">CONTACTO PRINCIPAL ({{ mascota.contacto }}):</span>
                     <div class="btn-row">
-                        <a href="https://wa.me/526272792334?text=Hola,%20tengo%20informaci%C3%B3n" target="_blank" class="btn btn-ws">💬 WhatsApp</a>
-                        <a href="tel:6272792334" class="btn btn-call">📞 Llamar</a>
+                        <a href="https://wa.me/52{{ mascota.contacto }}?text=Hola,%20tengo%20informaci%C3%B3n%20sobre%20{{ mascota.nombre }}" target="_blank" class="btn btn-ws">💬 WhatsApp</a>
+                        <a href="tel:{{ mascota.contacto }}" class="btn btn-call">📞 Llamar</a>
                     </div>
                 </div>
+                {% endif %}
 
                 <!-- CONTACTO SECUNDARIO -->
+                {% if mascota.contacto_secundario %}
                 <div class="contact-group">
-                    <span class="contact-label">CONTACTO SECUNDARIO:</span>
+                    <span class="contact-label">CONTACTO SECUNDARIO ({{ mascota.contacto_secundario }}):</span>
                     <div class="btn-row">
-                        <a href="https://wa.me/526271310481?text=Hola,%20tengo%20informaci%C3%B3n" target="_blank" class="btn btn-ws">💬 WhatsApp</a>
-                        <a href="tel:6271310481" class="btn btn-call">📞 Llamar</a>
+                        <a href="https://wa.me/52{{ mascota.contacto_secundario }}?text=Hola,%20tengo%20informaci%C3%B3n%20sobre%20{{ mascota.nombre }}" target="_blank" class="btn btn-ws">💬 WhatsApp</a>
+                        <a href="tel:{{ mascota.contacto_secundario }}" class="btn btn-call">📞 Llamar</a>
                     </div>
                 </div>
+                {% endif %}
 
                 <!-- OPCIONES DE UBICACION GPS -->
                 <span class="geo-title">📍 ENVIAR MI UBICACIÓN GPS A:</span>
-                <div class="btn-row">
-                    <button onclick="enviarUbicacion('526272792334')" class="btn btn-geo">Contacto Principal</button>
-                    <button onclick="enviarUbicacion('526271310481')" class="btn btn-geo">Contacto Secundario</button>
+                <div class="btn-row" style="flex-direction: column;">
+                    {% if mascota.contacto %}
+                        <button onclick="enviarUbicacion('52{{ mascota.contacto }}', '{{ mascota.nombre }}')" class="btn btn-geo">Contacto Principal</button>
+                    {% endif %}
+                    {% if mascota.contacto_secundario %}
+                        <button onclick="enviarUbicacion('52{{ mascota.contacto_secundario }}', '{{ mascota.nombre }}')" class="btn btn-geo">Contacto Secundario</button>
+                    {% endif %}
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        function enviarUbicacion(telefono) {
+        function enviarUbicacion(telefono, nombreMascota) {
             if (!navigator.geolocation) {
                 alert("Tu dispositivo no soporta geolocalización.");
                 return;
@@ -107,7 +138,7 @@
                     var lat = position.coords.latitude;
                     var lon = position.coords.longitude;
                     var urlMaps = "https://www.google.com/maps?q=" + lat + "," + lon;
-                    var mensaje = encodeURIComponent("¡Hola! Vi a tu mascota. Mi ubicación actual es: " + urlMaps);
+                    var mensaje = encodeURIComponent("¡Hola! Vi a " + nombreMascota + ". Mi ubicación actual es: " + urlMaps);
                     window.location.href = "https://wa.me/" + telefono + "?text=" + mensaje;
                 },
                 function(error) {
