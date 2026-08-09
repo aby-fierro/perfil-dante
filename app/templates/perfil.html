@@ -111,7 +111,7 @@
                 <div class="contact-group">
                     <span class="contact-label">CONTACTO PRINCIPAL:</span>
                     <div class="btn-row">
-                        <a href="https://wa.me/{{ tel1_clean }}?text=¡Hola!%20Acabo%20de%20escanear%20la%20placa%20de%20{{ mascota.nombre }}.%20¿Sigue%20perdida/o?" target="_blank" class="btn btn-ws">💬 WhatsApp</a>
+                        <a href="https://wa.me/{{ tel1_clean }}?text=¡Hola!%20Acabo%20de%20escanear%20la%20placa%20de%20{{ mascota.nombre }}.%20¿Sigue%20en%20búsqueda%20de%20su%20familia?" target="_blank" class="btn btn-ws">💬 WhatsApp</a>
                         <a href="tel:{{ digits1 }}" class="btn btn-call">📞 Llamar</a>
                     </div>
                 </div>
@@ -124,7 +124,7 @@
                 <div class="contact-group">
                     <span class="contact-label">CONTACTO SECUNDARIO:</span>
                     <div class="btn-row">
-                        <a href="https://wa.me/{{ tel2_clean }}?text=¡Hola!%20Acabo%20de%20escanear%20la%20placa%20de%20{{ mascota.nombre }}.%20¿Sigue%20perdida/o?" target="_blank" class="btn btn-ws">💬 WhatsApp</a>
+                        <a href="https://wa.me/{{ tel2_clean }}?text=¡Hola!%20Acabo%20de%20escanear%20la%20placa%20de%20{{ mascota.nombre }}.%20¿Sigue%20en%20búsqueda%20de%20su%20familia?" target="_blank" class="btn btn-ws">💬 WhatsApp</a>
                         <a href="tel:{{ digits2 }}" class="btn btn-call">📞 Llamar</a>
                     </div>
                 </div>
@@ -154,8 +154,8 @@
     <div id="modalGps" class="modal-overlay">
         <div class="modal-box">
             <h4>¿En qué situación estás?</h4>
-            <p>Selecciona una opción para enviar tu ubicación con el contexto correcto:</p>
-            <button class="modal-btn" onclick="procesarEnvioGps(1)">🏠 Tengo a la mascota resguardada conmigo</button>
+            <p>Selecciona una opción para enviar tu ubicación con el mensaje correcto:</p>
+            <button class="modal-btn" onclick="procesarEnvioGps(1)">🏠 Tengo a la mascota resguardada a salvo</button>
             <button class="modal-btn" onclick="procesarEnvioGps(2)">🐕 Estoy con la mascota aquí en la calle</button>
             <button class="modal-btn" onclick="procesarEnvioGps(3)">👀 Solo la vi pasar por aquí (no la pude atrapar)</button>
             <button class="modal-close" onclick="cerrarModalGps()">Cancelar</button>
@@ -192,11 +192,11 @@
                     var mensajeTexto = "";
 
                     if (opcion === 1) {
-                        mensajeTexto = "¡Hola! Tengo a " + nombreMascotaSeleccionada + " resguardada/o conmigo a salvo. Te comparto mi ubicación para que vengas por ella/él: " + urlMaps;
+                        mensajeTexto = "¡Hola! Tengo a " + nombreMascotaSeleccionada + " resguardada/o a salvo conmigo. Te comparto mi ubicación para el reencuentro: " + urlMaps;
                     } else if (opcion === 2) {
-                        mensajeTexto = "¡Hola! Encontré a " + nombreMascotaSeleccionada + " y la/lo tengo aquí conmigo en la calle. Mi ubicación exacta es: " + urlMaps;
+                        mensajeTexto = "¡Hola! Estoy con " + nombreMascotaSeleccionada + " en este momento en la calle. Mi ubicación exacta es: " + urlMaps;
                     } else {
-                        mensajeTexto = "¡Hola! Acabo de ver a " + nombreMascotaSeleccionada + " pasar por esta zona (no pude atraparla/o). Te comparto el punto donde la/lo vi: " + urlMaps;
+                        mensajeTexto = "¡Hola! Acabo de ver a " + nombreMascotaSeleccionada + " por esta zona. Te comparto el punto exacto del avistamiento: " + urlMaps;
                     }
 
                     var mensajeEncoded = encodeURIComponent(mensajeTexto);
