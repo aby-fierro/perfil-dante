@@ -3,12 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mascota Perdida - Dante</title>
+    <title>Perfil de Mascota - TagMePet</title>
     <style>
         * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body { background-color: #f0f2f5; margin: 0; padding: 20px 10px; display: flex; justify-content: center; }
         .card { background: white; max-width: 800px; width: 100%; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
-        .banner { background-color: #ef4444; color: white; text-align: center; padding: 12px; font-weight: bold; letter-spacing: 1px; font-size: 14px; text-transform: uppercase; }
+        
+        /* ESTADOS DE BANNERS */
+        .banner { color: white; text-align: center; padding: 12px; font-weight: bold; letter-spacing: 1px; font-size: 14px; text-transform: uppercase; }
+        .banner.perdido { background-color: #ef4444; } /* Rojo brillante */
+        .banner.seguro { background-color: #22c55e; } /* Verde brillante */
+
         .content { padding: 24px; display: flex; flex-wrap: wrap; gap: 24px; }
         .left-col { flex: 1; min-width: 280px; }
         .right-col { flex: 1; min-width: 280px; background: #fafafa; padding: 20px; border-radius: 12px; border: 1px solid #eee; }
@@ -33,25 +38,31 @@
 </head>
 <body>
     <div class="card">
-        <div class="banner">🚨 MASCOTA PERDIDA - REQUIERE AYUDA 🚨</div>
+        <!-- Ejemplo dinámico para estado PERDIDO (descomentar según backend):
+        <div class="banner perdido">🚨 MASCOTA PERDIDA - REQUIERE AYUDA 🚨</div>
+        -->
+        
+        <!-- Estado por defecto cuando está PERDIDO -->
+        <div class="banner perdido" id="bannerEstado">🚨 MASCOTA PERDIDA - REQUIERE AYUDA 🚨</div>
+
         <div class="content">
             <div class="left-col">
                 <div class="profile-header">
-                    <img src="/static/dante.jpg" alt="Dante" class="avatar">
+                    <img src="/static/foto_mascota.jpg" alt="Mascota" class="avatar">
                     <div>
-                        <h1 class="pet-name">Dante</h1>
+                        <h1 class="pet-name">Nombre Mascota</h1>
                         <div class="address">📍 Vive en: Col. Tierra y Libertad, Anenecuilco #11</div>
                     </div>
                 </div>
 
                 <div class="section-title">COMPORTAMIENTO</div>
                 <div class="info-box">
-                    <p>Dante es un perrito chihuahua gordito de casa. Normalmente no suele escaparse, pero cuando está fuera o en la calle se pone bastante nervioso y asustadizo. Puede desconfiar de personas desconocidas y, si alguien se le acerca de golpe o intenta agarrarlo rápido, es probable que se defienda o muerda por puro miedo y desconfianza. Por favor, háblale con calma, muévete despacio y llámanos para ir por él.</p>
+                    <p>Información de comportamiento sobre la mascota...</p>
                 </div>
 
                 <div class="section-title">SALUD Y ESTADO</div>
                 <div class="info-box health">
-                    <p>Está un poco gordito pero bien cuidado, cuenta con todas sus vacunas al día.</p>
+                    <p>Información médica y de salud de la mascota...</p>
                 </div>
             </div>
 
@@ -63,7 +74,7 @@
                 <div class="contact-group">
                     <span class="contact-label">CONTACTO PRINCIPAL:</span>
                     <div class="btn-row">
-                        <a href="https://wa.me/526272792334?text=Hola,%20tengo%20informaci%C3%B3n%20sobre%20Dante" target="_blank" class="btn btn-ws">💬 WhatsApp</a>
+                        <a href="https://wa.me/526272792334?text=Hola,%20tengo%20informaci%C3%B3n" target="_blank" class="btn btn-ws">💬 WhatsApp</a>
                         <a href="tel:6272792334" class="btn btn-call">📞 Llamar</a>
                     </div>
                 </div>
@@ -72,7 +83,7 @@
                 <div class="contact-group">
                     <span class="contact-label">CONTACTO SECUNDARIO:</span>
                     <div class="btn-row">
-                        <a href="https://wa.me/526271310481?text=Hola,%20tengo%20informaci%C3%B3n%20sobre%20Dante" target="_blank" class="btn btn-ws">💬 WhatsApp</a>
+                        <a href="https://wa.me/526271310481?text=Hola,%20tengo%20informaci%C3%B3n" target="_blank" class="btn btn-ws">💬 WhatsApp</a>
                         <a href="tel:6271310481" class="btn btn-call">📞 Llamar</a>
                     </div>
                 </div>
@@ -99,7 +110,7 @@
                     var lat = position.coords.latitude;
                     var lon = position.coords.longitude;
                     var urlMaps = "https://www.google.com/maps?q=" + lat + "," + lon;
-                    var mensaje = encodeURIComponent("¡Hola! Encontré o vi a Dante. Mi ubicación actual es: " + urlMaps);
+                    var mensaje = encodeURIComponent("¡Hola! Vi a tu mascota. Mi ubicación actual es: " + urlMaps);
                     window.location.href = "https://wa.me/" + telefono + "?text=" + mensaje;
                 },
                 function(error) {
