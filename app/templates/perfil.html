@@ -17,16 +17,24 @@
         .content { padding: 24px; display: flex; flex-wrap: wrap; gap: 24px; }
         .left-col { flex: 1; min-width: 280px; }
         .right-col { flex: 1; min-width: 280px; background: #fafafa; padding: 20px; border-radius: 12px; border: 1px solid #eee; }
+        
+        /* HEADER DE PERFIL */
         .profile-header { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
-        .avatar { width: 90px; height: 90px; border-radius: 50%; object-fit: cover; border: 3px solid #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.15); background-color: #e2e8f0; }
+        .profile-header.no-photo { gap: 0; } /* Si no hay foto, no deja espacio lateral sobrante */
+        .avatar { width: 90px; height: 90px; border-radius: 50%; object-fit: cover; border: 3px solid #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.15); flex-shrink: 0; }
+        
         .pet-name { margin: 0; font-size: 28px; color: #2c3e50; font-weight: 800; }
         .pet-subtitle { font-size: 14px; color: #64748b; margin-top: 2px; font-weight: 600; }
-        .address { font-size: 13px; color: #666; margin-top: 8px; background: #fff8e7; padding: 6px 10px; border-radius: 6px; border-left: 3px solid #f0ad4e; }
+        .address { font-size: 13px; color: #666; margin-top: 8px; background: #fff8e7; padding: 6px 10px; border-radius: 6px; border-left: 3px solid #f0ad4e; display: inline-block; }
+        
+        /* SECCIONES OPCIONALES DE INFORMACION */
         .section-title { font-size: 11px; font-weight: 700; color: #7f8c8d; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; margin-top: 14px; }
         .info-box { margin-bottom: 12px; padding-left: 12px; border-left: 3px solid #3498db; }
         .info-box.health { border-left-color: #2ecc71; }
         .info-box.notes { border-left-color: #f39c12; }
         .info-box p { margin: 0; font-size: 13px; color: #444; line-height: 1.5; }
+        
+        /* BOTONES DE CONTACTO */
         .contact-group { margin-bottom: 16px; }
         .contact-label { font-size: 11px; font-weight: 700; color: #555; text-transform: uppercase; margin-bottom: 8px; display: block; }
         .btn-row { display: flex; gap: 8px; margin-bottom: 10px; }
@@ -49,36 +57,42 @@
 
         <div class="content">
             <div class="left-col">
-                <div class="profile-header">
+                <!-- Header: Si no tiene foto_url, no renderiza tag <img> ni guarda espacio -->
+                <div class="profile-header {% if not mascota.foto_url %}no-photo{% endif %}">
                     {% if mascota.foto_url %}
                         <img src="{{ mascota.foto_url }}" alt="{{ mascota.nombre }}" class="avatar">
-                    {% else %}
-                        <img src="https://via.placeholder.com/150?text=Sin+Foto" alt="{{ mascota.nombre }}" class="avatar">
                     {% endif %}
                     <div>
                         <h1 class="pet-name">{{ mascota.nombre }}</h1>
-                        <div class="pet-subtitle">{{ mascota.especie }}{% if mascota.raza %} • {{ mascota.raza }}{% endif %}{% if mascota.edad %} • {{ mascota.edad }}{% endif %}</div>
-                        {% if mascota.direccion %}
+                        <div class="pet-subtitle">
+                            {{ mascota.especie }}
+                            {% if mascota.raza and mascota.raza.strip() %} • {{ mascota.raza }}{% endif %}
+                            {% if mascota.edad and mascota.edad.strip() %} • {{ mascota.edad }}{% endif %}
+                        </div>
+                        {% if mascota.direccion and mascota.direccion.strip() %}
                             <div class="address">📍 Vive en: {{ mascota.direccion }}</div>
                         {% endif %}
                     </div>
                 </div>
 
-                {% if mascota.comportamiento %}
+                <!-- COMPORTAMIENTO (Solo si existe) -->
+                {% if mascota.comportamiento and mascota.comportamiento.strip() %}
                     <div class="section-title">COMPORTAMIENTO</div>
                     <div class="info-box">
                         <p>{{ mascota.comportamiento }}</p>
                     </div>
                 {% endif %}
 
-                {% if mascota.salud %}
+                <!-- SALUD Y ESTADO (Solo si existe) -->
+                {% if mascota.salud and mascota.salud.strip() %}
                     <div class="section-title">SALUD Y ESTADO</div>
                     <div class="info-box health">
                         <p>{{ mascota.salud }}</p>
                     </div>
                 {% endif %}
 
-                {% if mascota.notas %}
+                <!-- NOTAS ADICIONALES (Solo si existe) -->
+                {% if mascota.notas and mascota.notas.strip() %}
                     <div class="section-title">NOTAS ADICIONALES</div>
                     <div class="info-box notes">
                         <p>{{ mascota.notas }}</p>
@@ -91,7 +105,7 @@
                 <p style="font-size:12px; color:#666; margin-bottom:16px;">Comunícate directamente con su familia:</p>
 
                 <!-- CONTACTO PRINCIPAL -->
-                {% if mascota.contacto %}
+                {% if mascota.contacto and mascota.contacto.strip() %}
                 {% set tel1_clean = mascota.contacto | replace(' ', '') | replace('-', '') | replace('(', '') | replace(')', '') %}
                 <div class="contact-group">
                     <span class="contact-label">CONTACTO PRINCIPAL:</span>
@@ -103,7 +117,7 @@
                 {% endif %}
 
                 <!-- CONTACTO SECUNDARIO -->
-                {% if mascota.contacto_secundario %}
+                {% if mascota.contacto_secundario and mascota.contacto_secundario.strip() %}
                 {% set tel2_clean = mascota.contacto_secundario | replace(' ', '') | replace('-', '') | replace('(', '') | replace(')', '') %}
                 <div class="contact-group">
                     <span class="contact-label">CONTACTO SECUNDARIO:</span>
@@ -115,14 +129,14 @@
                 {% endif %}
 
                 <!-- OPCIONES DE UBICACION GPS -->
-                {% if mascota.contacto or mascota.contacto_secundario %}
+                {% if (mascota.contacto and mascota.contacto.strip()) or (mascota.contacto_secundario and mascota.contacto_secundario.strip()) %}
                 <span class="geo-title">📍 ENVIAR MI UBICACIÓN GPS A:</span>
                 <div class="btn-row" style="flex-direction: column;">
-                    {% if mascota.contacto %}
+                    {% if mascota.contacto and mascota.contacto.strip() %}
                         {% set tel1_clean = mascota.contacto | replace(' ', '') | replace('-', '') | replace('(', '') | replace(')', '') %}
                         <button onclick="enviarUbicacion('52{{ tel1_clean }}', '{{ mascota.nombre }}')" class="btn btn-geo">Contacto Principal</button>
                     {% endif %}
-                    {% if mascota.contacto_secundario %}
+                    {% if mascota.contacto_secundario and mascota.contacto_secundario.strip() %}
                         {% set tel2_clean = mascota.contacto_secundario | replace(' ', '') | replace('-', '') | replace('(', '') | replace(')', '') %}
                         <button onclick="enviarUbicacion('52{{ tel2_clean }}', '{{ mascota.nombre }}')" class="btn btn-geo">Contacto Secundario</button>
                     {% endif %}
