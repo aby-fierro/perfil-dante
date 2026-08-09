@@ -1,10 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TagMePet - Alta de Collar Inteligente</title>
-    <!-- Librería ligera para generar QR en JS -->
+    <title>Tag Me Pet - Alta de Collar Inteligente</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <style>
         :root {
@@ -68,12 +67,13 @@
         }
 
         .header-tag h1 {
-            font-size: 1.6rem;
+            font-size: 1.5rem;
             letter-spacing: -0.5px;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
+            text-transform: uppercase;
         }
 
         .header-tag p {
@@ -224,7 +224,7 @@
 
     <div class="card-container">
         <div class="header-tag">
-            <h1>🏷️ Tag Me Pet 🏷️</h1>
+            <h1>🐾 ESTADO SEGURO / REGISTRADO EN TAG ME PET 🐾</h1>
             <p>Registro de Perfil de Emergencia para Collar QR</p>
         </div>
 
@@ -232,88 +232,88 @@
             <div class="form-grid-pc">
                 <div>
                     <div class="form-section">
-                        <label for="nombre">Nombre de la Mascota *</label>
+                        <label for="nombre">NOMBRE DE LA MASCOTA *</label>
                         <input type="text" id="nombre" name="nombre" placeholder="Ej. Sol, Frijol, Pepito" required>
                     </div>
 
                     <div class="form-section">
-                        <label for="foto">?? Fotografía (JPG, PNG o Galería)</label>
+                        <label for="foto">📸 FOTOGRAFÍA (JPG, PNG O GALERÍA)</label>
                         <input type="file" id="foto" name="foto" accept="image/*">
                     </div>
 
                     <div class="form-section">
-                        <label for="estado">?? Estado Actual de la Mascota</label>
+                        <label for="estado">🔴 ESTADO ACTUAL DE LA MASCOTA</label>
                         <select id="estado" name="estado">
-                            <option value="seguro" selected>?? A salvo en casa (Preventivo)</option>
-                            <option value="perdido">?? ¡PERDIDO! (Alerta Roja)</option>
+                            <option value="seguro" selected>🏡 A salvo en casa (Preventivo)</option>
+                            <option value="perdido">🚨 ¡PERDIDO! (Alerta Roja)</option>
                         </select>
                     </div>
 
                     <div class="form-section grid-2">
                         <div>
-                            <label for="especie">Especie *</label>
+                            <label for="especie">ESPECIE *</label>
                             <select id="especie" name="especie" required>
-                                <option value="Perro">?? Perro</option>
-                                <option value="Gato">?? Gato</option>
-                                <option value="Hurón">?? Hurón</option>
-                                <option value="Ave">?? Ave</option>
-                                <option value="Conejo">?? Conejo</option>
-                                <option value="Otra">?? Otra</option>
+                                <option value="Perro">🐶 Perro</option>
+                                <option value="Gato">🐱 Gato</option>
+                                <option value="Hurón">🦦 Hurón</option>
+                                <option value="Ave">🦜 Ave</option>
+                                <option value="Conejo">🐰 Conejo</option>
+                                <option value="Otra">🐾 Otra</option>
                             </select>
                         </div>
                         <div>
-                            <label for="raza">Raza / Tipo</label>
+                            <label for="raza">RAZA / TIPO</label>
                             <input type="text" id="raza" name="raza" placeholder="Ej. Mestizo, Schnauzer">
                         </div>
                     </div>
 
                     <div class="form-section grid-2">
                         <div>
-                            <label for="edad">Edad</label>
+                            <label for="edad">EDAD</label>
                             <input type="text" id="edad" name="edad" placeholder="Ej. 2 años">
                         </div>
                         <div>
-                            <label for="contacto">Teléfono Principal *</label>
+                            <label for="contacto">TELÉFONO PRINCIPAL *</label>
                             <input type="tel" id="contacto" name="contacto" placeholder="627-102-3456" required>
                         </div>
                     </div>
 
                     <div class="form-section">
-                        <label for="contacto_secundario">?? Teléfono Secundario (Opcional)</label>
+                        <label for="contacto_secundario">📞 TELÉFONO SECUNDARIO (OPCIONAL)</label>
                         <input type="tel" id="contacto_secundario" name="contacto_secundario" placeholder="627-139-2655">
                     </div>
                 </div>
 
                 <div>
                     <div class="form-section">
-                        <label for="direccion">?? Colonia / Dirección Aproximada</label>
+                        <label for="direccion">📍 COLONIA / DIRECCIÓN APROXIMADA</label>
                         <input type="text" id="direccion" name="direccion" placeholder="Ej. Col. Centro, Parral">
                     </div>
 
                     <div class="form-section">
-                        <label for="comportamiento">?? Comportamiento / Temperamento</label>
+                        <label for="comportamiento">🐕 COMPORTAMIENTO / TEMPERAMENTO</label>
                         <textarea id="comportamiento" name="comportamiento" placeholder="Ej. Desconfiado con desconocidos, acercarse con calma..."></textarea>
                     </div>
 
                     <div class="form-section">
-                        <label for="salud">?? Salud y Estado Físico</label>
+                        <label for="salud">💉 SALUD Y ESTADO FÍSICO</label>
                         <textarea id="salud" name="salud" placeholder="Ej. Esquema de vacunas completo, alérgico a cierto alimento..."></textarea>
                     </div>
 
                     <div class="form-section">
-                        <label for="notas">?? Notas Adicionales</label>
+                        <label for="notas">⚠️ NOTAS ADICIONALES</label>
                         <input type="text" id="notas" name="notas" placeholder="Ej. Responde al nombre o a silbidos">
                     </div>
                 </div>
             </div>
 
             <button type="submit" class="btn-submit">
-                ? Generar Ficha y Código QR
+                ✨ Generar Ficha y Código QR
             </button>
         </form>
 
         <div id="resultadoCard">
-            <h3>¡Ficha y Código QR Creados Exitosamente! ??</h3>
+            <h3>¡Ficha y Código QR Creados Exitosamente! 🎉</h3>
             <p>Escanea o descarga este código QR para colocarlo en el collar:</p>
             
             <div class="qr-box">
@@ -322,7 +322,7 @@
 
             <p>Enlace web asignado:</p>
             <div class="url-display" id="urlGenerada">https://...</div>
-            <a href="#" id="btnAbrirPerfil" target="_blank" class="btn-view">?? Abrir Ficha Individual</a>
+            <a href="#" id="btnAbrirPerfil" target="_blank" class="btn-view">📱 Abrir Ficha Individual</a>
         </div>
     </div>
 
@@ -341,10 +341,8 @@
             if (data.status === 'ok') {
                 const fullUrl = window.location.origin + data.url;
                 
-                // Limpiar QR previo si existía
                 document.getElementById('qrCodeContainer').innerHTML = '';
                 
-                // Generar el nuevo QR
                 new QRCode(document.getElementById('qrCodeContainer'), {
                     text: fullUrl,
                     width: 180,
