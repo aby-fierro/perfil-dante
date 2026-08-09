@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -9,32 +9,28 @@
         body { background-color: #f0f2f5; margin: 0; padding: 20px 10px; display: flex; justify-content: center; }
         .card { background: white; max-width: 800px; width: 100%; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
         
-        /* ESTADOS DE BANNERS */
         .banner { color: white; text-align: center; padding: 12px; font-weight: bold; letter-spacing: 1px; font-size: 14px; text-transform: uppercase; }
-        .banner.perdido { background-color: #ef4444; } /* Rojo brillante si está perdido */
-        .banner.seguro { background-color: #22c55e; } /* Verde brillante si está seguro */
+        .banner.perdido { background-color: #ef4444; }
+        .banner.seguro { background-color: #22c55e; }
 
         .content { padding: 24px; display: flex; flex-wrap: wrap; gap: 24px; }
         .left-col { flex: 1; min-width: 280px; }
         .right-col { flex: 1; min-width: 280px; background: #fafafa; padding: 20px; border-radius: 12px; border: 1px solid #eee; }
         
-        /* HEADER DE PERFIL */
         .profile-header { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
-        .profile-header.no-photo { gap: 0; } /* Si no hay foto, no deja espacio lateral sobrante */
+        .profile-header.no-photo { gap: 0; }
         .avatar { width: 90px; height: 90px; border-radius: 50%; object-fit: cover; border: 3px solid #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.15); flex-shrink: 0; }
         
         .pet-name { margin: 0; font-size: 28px; color: #2c3e50; font-weight: 800; }
         .pet-subtitle { font-size: 14px; color: #64748b; margin-top: 2px; font-weight: 600; }
         .address { font-size: 13px; color: #666; margin-top: 8px; background: #fff8e7; padding: 6px 10px; border-radius: 6px; border-left: 3px solid #f0ad4e; display: inline-block; }
         
-        /* SECCIONES OPCIONALES DE INFORMACION */
         .section-title { font-size: 11px; font-weight: 700; color: #7f8c8d; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; margin-top: 14px; }
         .info-box { margin-bottom: 12px; padding-left: 12px; border-left: 3px solid #3498db; }
         .info-box.health { border-left-color: #2ecc71; }
         .info-box.notes { border-left-color: #f39c12; }
         .info-box p { margin: 0; font-size: 13px; color: #444; line-height: 1.5; }
         
-        /* BOTONES DE CONTACTO */
         .contact-group { margin-bottom: 16px; }
         .contact-label { font-size: 11px; font-weight: 700; color: #555; text-transform: uppercase; margin-bottom: 8px; display: block; }
         .btn-row { display: flex; gap: 8px; margin-bottom: 10px; }
@@ -48,7 +44,6 @@
 </head>
 <body>
     <div class="card">
-        <!-- Banner dinámico dependiendo del estado -->
         {% if mascota.estado == 'perdido' %}
             <div class="banner perdido">🚨 MASCOTA PERDIDA - REQUIERE AYUDA 🚨</div>
         {% else %}
@@ -57,7 +52,6 @@
 
         <div class="content">
             <div class="left-col">
-                <!-- Header: Si no tiene foto_url, no renderiza tag <img> ni guarda espacio -->
                 <div class="profile-header {% if not mascota.foto_url %}no-photo{% endif %}">
                     {% if mascota.foto_url %}
                         <img src="{{ mascota.foto_url }}" alt="{{ mascota.nombre }}" class="avatar">
@@ -75,7 +69,6 @@
                     </div>
                 </div>
 
-                <!-- COMPORTAMIENTO (Solo si existe) -->
                 {% if mascota.comportamiento and mascota.comportamiento.strip() %}
                     <div class="section-title">COMPORTAMIENTO</div>
                     <div class="info-box">
@@ -83,7 +76,6 @@
                     </div>
                 {% endif %}
 
-                <!-- SALUD Y ESTADO (Solo si existe) -->
                 {% if mascota.salud and mascota.salud.strip() %}
                     <div class="section-title">SALUD Y ESTADO</div>
                     <div class="info-box health">
@@ -91,7 +83,6 @@
                     </div>
                 {% endif %}
 
-                <!-- NOTAS ADICIONALES (Solo si existe) -->
                 {% if mascota.notas and mascota.notas.strip() %}
                     <div class="section-title">NOTAS ADICIONALES</div>
                     <div class="info-box notes">
@@ -106,24 +97,26 @@
 
                 <!-- CONTACTO PRINCIPAL -->
                 {% if mascota.contacto and mascota.contacto.strip() %}
-                {% set tel1_clean = mascota.contacto | replace(' ', '') | replace('-', '') | replace('(', '') | replace(')', '') %}
+                {% set digits1 = mascota.contacto | replace(' ', '') | replace('-', '') | replace('(', '') | replace(')', '') | replace('+', '') %}
+                {% set tel1_clean = digits1 if digits1.startswith('52') else '52' ~ digits1 %}
                 <div class="contact-group">
                     <span class="contact-label">CONTACTO PRINCIPAL:</span>
                     <div class="btn-row">
-                        <a href="https://wa.me/52{{ tel1_clean }}?text=Hola,%20tengo%20informaci%C3%B3n%20sobre%20{{ mascota.nombre }}" target="_blank" class="btn btn-ws">💬 WhatsApp</a>
-                        <a href="tel:{{ tel1_clean }}" class="btn btn-call">📞 Llamar</a>
+                        <a href="https://wa.me/{{ tel1_clean }}?text=Hola,%20tengo%20informaci%C3%B3n%20sobre%20{{ mascota.nombre }}" target="_blank" class="btn btn-ws">💬 WhatsApp</a>
+                        <a href="tel:{{ digits1 }}" class="btn btn-call">📞 Llamar</a>
                     </div>
                 </div>
                 {% endif %}
 
                 <!-- CONTACTO SECUNDARIO -->
                 {% if mascota.contacto_secundario and mascota.contacto_secundario.strip() %}
-                {% set tel2_clean = mascota.contacto_secundario | replace(' ', '') | replace('-', '') | replace('(', '') | replace(')', '') %}
+                {% set digits2 = mascota.contacto_secundario | replace(' ', '') | replace('-', '') | replace('(', '') | replace(')', '') | replace('+', '') %}
+                {% set tel2_clean = digits2 if digits2.startswith('52') else '52' ~ digits2 %}
                 <div class="contact-group">
                     <span class="contact-label">CONTACTO SECUNDARIO:</span>
                     <div class="btn-row">
-                        <a href="https://wa.me/52{{ tel2_clean }}?text=Hola,%20tengo%20informaci%C3%B3n%20sobre%20{{ mascota.nombre }}" target="_blank" class="btn btn-ws">💬 WhatsApp</a>
-                        <a href="tel:{{ tel2_clean }}" class="btn btn-call">📞 Llamar</a>
+                        <a href="https://wa.me/{{ tel2_clean }}?text=Hola,%20tengo%20informaci%C3%B3n%20sobre%20{{ mascota.nombre }}" target="_blank" class="btn btn-ws">💬 WhatsApp</a>
+                        <a href="tel:{{ digits2 }}" class="btn btn-call">📞 Llamar</a>
                     </div>
                 </div>
                 {% endif %}
@@ -133,12 +126,14 @@
                 <span class="geo-title">📍 ENVIAR MI UBICACIÓN GPS A:</span>
                 <div class="btn-row" style="flex-direction: column;">
                     {% if mascota.contacto and mascota.contacto.strip() %}
-                        {% set tel1_clean = mascota.contacto | replace(' ', '') | replace('-', '') | replace('(', '') | replace(')', '') %}
-                        <button onclick="enviarUbicacion('52{{ tel1_clean }}', '{{ mascota.nombre }}')" class="btn btn-geo">Contacto Principal</button>
+                        {% set digits1 = mascota.contacto | replace(' ', '') | replace('-', '') | replace('(', '') | replace(')', '') | replace('+', '') %}
+                        {% set tel1_clean = digits1 if digits1.startswith('52') else '52' ~ digits1 %}
+                        <button onclick="enviarUbicacion('{{ tel1_clean }}', '{{ mascota.nombre }}')" class="btn btn-geo">Contacto Principal</button>
                     {% endif %}
                     {% if mascota.contacto_secundario and mascota.contacto_secundario.strip() %}
-                        {% set tel2_clean = mascota.contacto_secundario | replace(' ', '') | replace('-', '') | replace('(', '') | replace(')', '') %}
-                        <button onclick="enviarUbicacion('52{{ tel2_clean }}', '{{ mascota.nombre }}')" class="btn btn-geo">Contacto Secundario</button>
+                        {% set digits2 = mascota.contacto_secundario | replace(' ', '') | replace('-', '') | replace('(', '') | replace(')', '') | replace('+', '') %}
+                        {% set tel2_clean = digits2 if digits2.startswith('52') else '52' ~ digits2 %}
+                        <button onclick="enviarUbicacion('{{ tel2_clean }}', '{{ mascota.nombre }}')" class="btn btn-geo">Contacto Secundario</button>
                     {% endif %}
                 </div>
                 {% endif %}
