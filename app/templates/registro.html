@@ -8,16 +8,16 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <style>
         :root {
-            --primary: #0d9488;
-            --primary-dark: #0f766e;
+            --primary: #0f766e;
+            --primary-dark: #115e59;
             --bg: #f0fdfa;
             --card: #ffffff;
             --text-main: #0f172a;
-            --text-sub: #334155;
+            --text-sub: #1e293b;
             --border: #ccfbf1;
             --input-border: #cbd5e1;
-            --success-green: #15803d;
-            --success-bg: #f0fdf4;
+            --success-green: #0f766e;
+            --success-bg: #f0fdfa;
         }
 
         * {
@@ -42,7 +42,7 @@
             width: 100%;
             max-width: 520px;
             border-radius: 20px;
-            box-shadow: 0 10px 25px -5px rgba(13, 148, 136, 0.15);
+            box-shadow: 0 10px 25px -5px rgba(15, 118, 110, 0.15);
             border: 1px solid var(--border);
             overflow: hidden;
             transition: max-width 0.3s ease;
@@ -60,11 +60,11 @@
         }
 
         .header-tag {
-            background: linear-gradient(135deg, #115e59 0%, #0f766e 100%);
+            background: linear-gradient(135deg, #0f172a 0%, #0f766e 100%);
             color: white;
             padding: 24px 20px;
             text-align: center;
-            border-bottom: 4px solid #2dd4bf;
+            border-bottom: 4px solid #14b8a6;
         }
 
         .header-tag h1 {
@@ -127,7 +127,7 @@
             outline: none;
             border-color: var(--primary);
             background-color: #ffffff;
-            box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.2);
+            box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.2);
         }
 
         textarea {
@@ -162,20 +162,20 @@
             margin: 20px;
             padding: 20px;
             background-color: var(--success-bg);
-            border: 1.5px solid #bbf7d0;
+            border: 1.5px solid #99f6e4;
             border-radius: 14px;
             text-align: center;
         }
 
         #resultadoCard h3 {
-            color: var(--success-green);
+            color: var(--primary-dark);
             font-size: 1.1rem;
             margin-bottom: 6px;
         }
 
         #resultadoCard p {
             font-size: 0.85rem;
-            color: #166534;
+            color: #0f172a;
             margin-bottom: 12px;
         }
 
@@ -206,7 +206,7 @@
         .btn-view {
             display: inline-block;
             width: 100%;
-            background-color: var(--success-green);
+            background-color: var(--primary);
             color: white;
             text-decoration: none;
             padding: 12px;
@@ -216,7 +216,7 @@
         }
 
         .btn-view:hover {
-            background-color: #14532d;
+            background-color: var(--primary-dark);
         }
     </style>
 </head>
@@ -224,7 +224,7 @@
 
     <div class="card-container">
         <div class="header-tag">
-            <h1>🏷️ TagMePet</h1>
+            <h1>🐾 ESTADO SEGURO / REGISTRADO EN TAGMEPET 🐾</h1>
             <p>Registro de Perfil de Emergencia para Collar QR</p>
         </div>
 
@@ -349,7 +349,7 @@
                     text: fullUrl,
                     width: 180,
                     height: 180,
-                    colorDark: "#0d9488",
+                    colorDark: "#0f766e",
                     colorLight: "#ffffff",
                     correctLevel: QRCode.CorrectLevel.H
                 });

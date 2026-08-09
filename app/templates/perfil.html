@@ -3,145 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfil de {{ mascota.nombre }} - TagMePet</title>
-    <!-- Librería para desplegar el QR en la vista individual -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <title>Mascota Perdida - Dante</title>
     <style>
-        body { font-family: system-ui, -apple-system, sans-serif; background: #f0fdfa; margin: 0; padding: 20px; display: flex; justify-content: center; }
-        .card { background: white; max-width: 440px; width: 100%; border-radius: 20px; padding: 22px; box-shadow: 0 10px 25px rgba(0,0,0,0.06); border: 1px solid #ccfbf1; }
-        
-        .banner-estado { background: #0d9488; color: white; text-align: center; padding: 12px; border-radius: 12px; font-weight: bold; font-size: 1.05rem; margin-bottom: 16px; }
-        .banner-estado.perdido { background: #ef4444; }
-
-        .foto-container { width: 100%; height: 280px; border-radius: 16px; overflow: hidden; background: #f0f0f0; margin-bottom: 16px; }
-        .foto { width: 100%; height: 100%; object-fit: cover; }
-
-        .nombre-container { font-size: 1.8rem; font-weight: bold; color: #0f172a; margin-bottom: 12px; text-align: center; }
-
-        .section-box { background: #f8fafc; border-radius: 12px; padding: 12px 14px; margin-bottom: 12px; border: 1px solid #f1f5f9; }
-        .label { color: #0d9488; font-weight: bold; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 4px; display: flex; align-items: center; gap: 6px; }
-        .label.perdido { color: #dc2626; }
-        .value { color: #334155; font-size: 0.98rem; line-height: 1.4; }
-
-        .contact-group { margin-top: 18px; border-top: 2px dashed #e2e8f0; padding-top: 16px; }
-        .contact-title { font-weight: bold; color: #0f172a; font-size: 0.95rem; margin-bottom: 8px; }
-
-        .btn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
-        .btn { display: flex; align-items: center; justify-content: center; gap: 6px; padding: 12px; border-radius: 10px; text-decoration: none; font-weight: bold; font-size: 0.95rem; color: white; transition: transform 0.1s; }
-        .btn:active { transform: scale(0.97); }
-
-        .btn-wa { background: #25d366; }
-        .btn-call { background: #0d9488; }
-        .btn-call.perdido { background: #ef4444; }
-
-        .btn-gps { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; background: #0284c7; color: white; padding: 14px 0; border-radius: 12px; text-decoration: none; font-weight: bold; font-size: 1rem; margin-top: 10px; box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25); cursor: pointer; border: none; }
-        .btn-gps:active { transform: scale(0.98); }
-
-        .qr-section { margin-top: 20px; background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 12px; padding: 16px; text-align: center; }
-        .qr-section h4 { color: #0f172a; margin-bottom: 8px; font-size: 0.95rem; }
-        #qrDisplay { display: flex; justify-content: center; margin-top: 10px; }
+        * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #f0f2f5; margin: 0; padding: 20px 10px; display: flex; justify-content: center; }
+        .card { background: white; max-width: 800px; width: 100%; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+        .banner { background-color: #ef4444; color: white; text-align: center; padding: 12px; font-weight: bold; letter-spacing: 1px; font-size: 14px; text-transform: uppercase; }
+        .content { padding: 24px; display: flex; flex-wrap: wrap; gap: 24px; }
+        .left-col { flex: 1; min-width: 280px; }
+        .right-col { flex: 1; min-width: 280px; background: #fafafa; padding: 20px; border-radius: 12px; border: 1px solid #eee; }
+        .profile-header { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
+        .avatar { width: 90px; height: 90px; border-radius: 50%; object-fit: cover; border: 3px solid #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+        .pet-name { margin: 0; font-size: 28px; color: #2c3e50; font-weight: 800; }
+        .address { font-size: 13px; color: #666; margin-top: 4px; background: #fff8e7; padding: 6px 10px; border-radius: 6px; border-left: 3px solid #f0ad4e; }
+        .section-title { font-size: 11px; font-weight: 700; color: #7f8c8d; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+        .info-box { margin-bottom: 18px; padding-left: 12px; border-left: 3px solid #3498db; }
+        .info-box.health { border-left-color: #2ecc71; }
+        .info-box p { margin: 0; font-size: 13px; color: #444; line-height: 1.5; }
+        .contact-group { margin-bottom: 16px; }
+        .contact-label { font-size: 11px; font-weight: 700; color: #555; text-transform: uppercase; margin-bottom: 8px; display: block; }
+        .btn-row { display: flex; gap: 8px; margin-bottom: 10px; }
+        .btn { flex: 1; padding: 10px 14px; border-radius: 8px; text-decoration: none; font-size: 13px; font-weight: 600; text-align: center; border: none; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 6px; transition: opacity 0.2s; }
+        .btn:hover { opacity: 0.9; }
+        .btn-ws { background-color: #25D366; color: white; }
+        .btn-call { background-color: #3182ce; color: white; }
+        .btn-geo { background-color: #e53e3e; color: white; width: 100%; padding: 10px; font-size: 12px; }
+        .geo-title { font-size: 11px; font-weight: 700; color: #e53e3e; text-transform: uppercase; margin-top: 15px; margin-bottom: 8px; display: block; }
     </style>
 </head>
 <body>
     <div class="card">
-        <div class="banner-estado {{ 'perdido' if es_perdido else '' }}">
-            🐾 {{ '🚨 MASCOTA PERDIDA - REQUIERE AYUDA' if es_perdido else 'Estado Seguro / Registrado en TagMePet' }}
-        </div>
+        <div class="banner">🚨 MASCOTA PERDIDA - REQUIERE AYUDA 🚨</div>
+        <div class="content">
+            <div class="left-col">
+                <div class="profile-header">
+                    <img src="/static/dante.jpg" alt="Dante" class="avatar">
+                    <div>
+                        <h1 class="pet-name">Dante</h1>
+                        <div class="address">📍 Vive en: Col. Tierra y Libertad, Anenecuilco #11</div>
+                    </div>
+                </div>
 
-        <div class="foto-container">
-            <img src="{{ mascota.foto_url }}" class="foto" alt="{{ mascota.nombre }}">
-        </div>
-        
-        <div class="nombre-container">
-            {{ mascota.nombre }}
-        </div>
+                <div class="section-title">COMPORTAMIENTO</div>
+                <div class="info-box">
+                    <p>Dante es un perrito chihuahua gordito de casa. Normalmente no suele escaparse, pero cuando está fuera o en la calle se pone bastante nervioso y asustadizo. Puede desconfiar de personas desconocidas y, si alguien se le acerca de golpe o intenta agarrarlo rápido, es probable que se defienda o muerda por puro miedo y desconfianza. Por favor, háblale con calma, muévete despacio y llámanos para ir por él.</p>
+                </div>
 
-        <div class="section-box">
-            <div class="label {{ 'perdido' if es_perdido else '' }}">🐾 ESPECIE Y RAZA</div>
-            <div class="value">{{ mascota.especie }} {% if mascota.raza %}({{ mascota.raza }}){% endif %} - {{ mascota.edad }}</div>
-        </div>
-
-        {% if mascota.direccion and mascota.direccion.strip() %}
-        <div class="section-box">
-            <div class="label {{ 'perdido' if es_perdido else '' }}">📍 VIVE EN</div>
-            <div class="value">{{ mascota.direccion }}</div>
-        </div>
-        {% endif %}
-
-        {% if mascota.comportamiento and mascota.comportamiento.strip() %}
-        <div class="section-box">
-            <div class="label {{ 'perdido' if es_perdido else '' }}">🐕 COMPORTAMIENTO</div>
-            <div class="value">{{ mascota.comportamiento }}</div>
-        </div>
-        {% endif %}
-
-        {% if mascota.salud and mascota.salud.strip() %}
-        <div class="section-box">
-            <div class="label {{ 'perdido' if es_perdido else '' }}">💉 SALUD Y ESTADO</div>
-            <div class="value">{{ mascota.salud }}</div>
-        </div>
-        {% endif %}
-
-        {% if mascota.notas and mascota.notas.strip() %}
-        <div class="section-box">
-            <div class="label {{ 'perdido' if es_perdido else '' }}">⚠️ NOTAS ADICIONALES</div>
-            <div class="value">{{ mascota.notas }}</div>
-        </div>
-        {% endif %}
-
-        <div class="contact-group">
-            <div style="text-align: center; font-weight: bold; margin-bottom: 12px; color: #0f172a;">
-                ¿Lo encontraste o lo viste?<br>
-                <span style="font-size: 0.85rem; font-weight: normal; color: #64748b;">Comunícate directamente con su familia:</span>
+                <div class="section-title">SALUD Y ESTADO</div>
+                <div class="info-box health">
+                    <p>Está un poco gordito pero bien cuidado, cuenta con todas sus vacunas al día.</p>
+                </div>
             </div>
 
-            <div class="contact-title">Contacto Principal:</div>
-            <div class="btn-grid">
-                <a href="https://wa.me/52{{ tel1_limpio }}?text=Hola,%20tengo%20información%20sobre%20{{ mascota.nombre }}" target="_blank" class="btn btn-wa">💬 WhatsApp</a>
-                <a href="tel:{{ tel1_limpio }}" class="btn btn-call {{ 'perdido' if es_perdido else '' }}">📞 Llamar</a>
+            <div class="right-col">
+                <h3 style="margin-top:0; color:#2c3e50; font-size:16px;">¿Lo encontraste o lo viste?</h3>
+                <p style="font-size:12px; color:#666; margin-bottom:16px;">Comunícate directamente con su familia:</p>
+
+                <!-- CONTACTO PRINCIPAL -->
+                <div class="contact-group">
+                    <span class="contact-label">CONTACTO PRINCIPAL:</span>
+                    <div class="btn-row">
+                        <a href="https://wa.me/526272792334?text=Hola,%20tengo%20informaci%C3%B3n%20sobre%20Dante" target="_blank" class="btn btn-ws">💬 WhatsApp</a>
+                        <a href="tel:6272792334" class="btn btn-call">📞 Llamar</a>
+                    </div>
+                </div>
+
+                <!-- CONTACTO SECUNDARIO -->
+                <div class="contact-group">
+                    <span class="contact-label">CONTACTO SECUNDARIO:</span>
+                    <div class="btn-row">
+                        <a href="https://wa.me/526271310481?text=Hola,%20tengo%20informaci%C3%B3n%20sobre%20Dante" target="_blank" class="btn btn-ws">💬 WhatsApp</a>
+                        <a href="tel:6271310481" class="btn btn-call">📞 Llamar</a>
+                    </div>
+                </div>
+
+                <!-- OPCIONES DE UBICACION GPS -->
+                <span class="geo-title">📍 ENVIAR MI UBICACIÓN GPS A:</span>
+                <div class="btn-row">
+                    <button onclick="enviarUbicacion('526272792334')" class="btn btn-geo">Contacto Principal</button>
+                    <button onclick="enviarUbicacion('526271310481')" class="btn btn-geo">Contacto Secundario</button>
+                </div>
             </div>
-
-            {% if tel2_limpio and tel2_limpio.strip() %}
-            <div class="contact-title">Contacto Secundario:</div>
-            <div class="btn-grid">
-                <a href="https://wa.me/52{{ tel2_limpio }}?text=Hola,%20tengo%20información%20sobre%20{{ mascota.nombre }}" target="_blank" class="btn btn-wa">💬 WhatsApp</a>
-                <a href="tel:{{ tel2_limpio }}" class="btn btn-call {{ 'perdido' if es_perdido else '' }}">📞 Llamar</a>
-            </div>
-            {% endif %}
-
-            <button onclick="compartirUbicacion()" class="btn-gps">
-                📍 Compartir mi Ubicación GPS
-            </button>
-        </div>
-
-        <div class="qr-section">
-            <h4>📱 Código QR del Collar</h4>
-            <div id="qrDisplay"></div>
         </div>
     </div>
 
     <script>
-        // Dibujar el QR único de esta mascota al cargar la página
-        new QRCode(document.getElementById('qrDisplay'), {
-            text: window.location.href,
-            width: 140,
-            height: 140,
-            colorDark: "#0d9488",
-            colorLight: "#ffffff"
-        });
-
-        function compartirUbicacion() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function(position) {
-                    const lat = position.coords.latitude;
-                    const lon = position.coords.longitude;
-                    const urlGps = `https://maps.google.com/?q=${lat},${lon}`;
-                    const msg = encodeURIComponent(`Hola, encontré a {{ mascota.nombre }}. Mi ubicación actual es: ${urlGps}`);
-                    window.open(`https://wa.me/52{{ tel1_limpio }}?text=${msg}`, '_blank');
-                });
-            } else {
-                alert("La geolocalización no está soportada en este navegador.");
+        function enviarUbicacion(telefono) {
+            if (!navigator.geolocation) {
+                alert("Tu dispositivo no soporta geolocalización.");
+                return;
             }
+
+            navigator.geolocation.getCurrentPosition(
+                function(position) {
+                    var lat = position.coords.latitude;
+                    var lon = position.coords.longitude;
+                    var urlMaps = "https://www.google.com/maps?q=" + lat + "," + lon;
+                    var mensaje = encodeURIComponent("¡Hola! Encontré o vi a Dante. Mi ubicación actual es: " + urlMaps);
+                    window.location.href = "https://wa.me/" + telefono + "?text=" + mensaje;
+                },
+                function(error) {
+                    alert("No se pudo obtener la ubicación GPS. Verifica tener activada la ubicación en tu dispositivo.");
+                },
+                { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+            );
         }
     </script>
 </body>
