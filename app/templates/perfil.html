@@ -60,8 +60,8 @@
                         <h1 class="pet-name">{{ mascota.nombre }}</h1>
                         <div class="pet-subtitle">
                             {{ mascota.especie }}
-                            {% if mascota.raza and mascota.raza.strip() %} • {{ mascota.raza }}{% endif %}
-                            {% if mascota.edad and mascota.edad.strip() %} • {{ mascota.edad }}{% endif %}
+                            {% if mascota.raza and mascota.raza.strip() and mascota.raza.lower() != 'no especificada' %} • {{ mascota.raza }}{% endif %}
+                            {% if mascota.edad and mascota.edad.strip() and mascota.edad.lower() != 'no especificada' %} • {{ mascota.edad }}{% endif %}
                         </div>
                         {% if mascota.direccion and mascota.direccion.strip() %}
                             <div class="address">📍 Vive en: {{ mascota.direccion }}</div>
@@ -102,7 +102,7 @@
                 <div class="contact-group">
                     <span class="contact-label">CONTACTO PRINCIPAL:</span>
                     <div class="btn-row">
-                        <a href="https://wa.me/{{ tel1_clean }}?text=Hola,%20tengo%20informaci%C3%B3n%20sobre%20{{ mascota.nombre }}" target="_blank" class="btn btn-ws">💬 WhatsApp</a>
+                        <a href="https://wa.me/{{ tel1_clean }}?text=Hola,%20tengo%20informaci%C3%B3n%20sobre%20{{ mascota.nombre }}." target="_blank" class="btn btn-ws">💬 WhatsApp</a>
                         <a href="tel:{{ digits1 }}" class="btn btn-call">📞 Llamar</a>
                     </div>
                 </div>
@@ -115,7 +115,7 @@
                 <div class="contact-group">
                     <span class="contact-label">CONTACTO SECUNDARIO:</span>
                     <div class="btn-row">
-                        <a href="https://wa.me/{{ tel2_clean }}?text=Hola,%20tengo%20informaci%C3%B3n%20sobre%20{{ mascota.nombre }}" target="_blank" class="btn btn-ws">💬 WhatsApp</a>
+                        <a href="https://wa.me/{{ tel2_clean }}?text=Hola,%20tengo%20informaci%C3%B3n%20sobre%20{{ mascota.nombre }}." target="_blank" class="btn btn-ws">💬 WhatsApp</a>
                         <a href="tel:{{ digits2 }}" class="btn btn-call">📞 Llamar</a>
                     </div>
                 </div>
@@ -153,7 +153,7 @@
                     var lat = position.coords.latitude;
                     var lon = position.coords.longitude;
                     var urlMaps = "https://www.google.com/maps?q=" + lat + "," + lon;
-                    var mensaje = encodeURIComponent("¡Hola! Vi a " + nombreMascota + ". Mi ubicación actual es: " + urlMaps);
+                    var mensaje = encodeURIComponent("Hola, encontré / vi a " + nombreMascota + ". Aquí te comparto la ubicación donde estoy: " + urlMaps);
                     window.location.href = "https://wa.me/" + telefono + "?text=" + mensaje;
                 },
                 function(error) {
