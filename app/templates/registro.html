@@ -1,10 +1,10 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TagMePet - Alta de Collar Inteligente</title>
-    <!-- Librería ligera para generar QR en JS -->
+    <!-- Librer�a ligera para generar QR en JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <style>
         :root {
@@ -224,7 +224,7 @@
 
     <div class="card-container">
         <div class="header-tag">
-            <h1>🏷️ TAGMEPET</h1>
+            <h1>??? Tag Me Pet ???</h1>
             <p>Registro de Perfil de Emergencia para Collar QR</p>
         </div>
 
@@ -237,15 +237,15 @@
                     </div>
 
                     <div class="form-section">
-                        <label for="foto">📸 Fotografía (JPG, PNG o Galería)</label>
+                        <label for="foto">?? Fotograf�a (JPG, PNG o Galer�a)</label>
                         <input type="file" id="foto" name="foto" accept="image/*">
                     </div>
 
                     <div class="form-section">
-                        <label for="estado">🔴 Estado Actual de la Mascota</label>
+                        <label for="estado">?? Estado Actual de la Mascota</label>
                         <select id="estado" name="estado">
-                            <option value="seguro" selected>🏡 A salvo en casa (Preventivo)</option>
-                            <option value="perdido">🚨 ¡PERDIDO! (Alerta Roja)</option>
+                            <option value="seguro" selected>?? A salvo en casa (Preventivo)</option>
+                            <option value="perdido">?? �PERDIDO! (Alerta Roja)</option>
                         </select>
                     </div>
 
@@ -253,12 +253,12 @@
                         <div>
                             <label for="especie">Especie *</label>
                             <select id="especie" name="especie" required>
-                                <option value="Perro">🐶 Perro</option>
-                                <option value="Gato">🐱 Gato</option>
-                                <option value="Hurón">🦦 Hurón</option>
-                                <option value="Ave">🦜 Ave</option>
-                                <option value="Conejo">🐰 Conejo</option>
-                                <option value="Otra">🐾 Otra</option>
+                                <option value="Perro">?? Perro</option>
+                                <option value="Gato">?? Gato</option>
+                                <option value="Hur�n">?? Hur�n</option>
+                                <option value="Ave">?? Ave</option>
+                                <option value="Conejo">?? Conejo</option>
+                                <option value="Otra">?? Otra</option>
                             </select>
                         </div>
                         <div>
@@ -270,51 +270,51 @@
                     <div class="form-section grid-2">
                         <div>
                             <label for="edad">Edad</label>
-                            <input type="text" id="edad" name="edad" placeholder="Ej. 2 años">
+                            <input type="text" id="edad" name="edad" placeholder="Ej. 2 a�os">
                         </div>
                         <div>
-                            <label for="contacto">Teléfono Principal *</label>
+                            <label for="contacto">Tel�fono Principal *</label>
                             <input type="tel" id="contacto" name="contacto" placeholder="627-102-3456" required>
                         </div>
                     </div>
 
                     <div class="form-section">
-                        <label for="contacto_secundario">📞 Teléfono Secundario (Opcional)</label>
+                        <label for="contacto_secundario">?? Tel�fono Secundario (Opcional)</label>
                         <input type="tel" id="contacto_secundario" name="contacto_secundario" placeholder="627-139-2655">
                     </div>
                 </div>
 
                 <div>
                     <div class="form-section">
-                        <label for="direccion">📍 Colonia / Dirección Aproximada</label>
+                        <label for="direccion">?? Colonia / Direcci�n Aproximada</label>
                         <input type="text" id="direccion" name="direccion" placeholder="Ej. Col. Centro, Parral">
                     </div>
 
                     <div class="form-section">
-                        <label for="comportamiento">🐕 Comportamiento / Temperamento</label>
+                        <label for="comportamiento">?? Comportamiento / Temperamento</label>
                         <textarea id="comportamiento" name="comportamiento" placeholder="Ej. Desconfiado con desconocidos, acercarse con calma..."></textarea>
                     </div>
 
                     <div class="form-section">
-                        <label for="salud">💉 Salud y Estado Físico</label>
-                        <textarea id="salud" name="salud" placeholder="Ej. Esquema de vacunas completo, alérgico a cierto alimento..."></textarea>
+                        <label for="salud">?? Salud y Estado F�sico</label>
+                        <textarea id="salud" name="salud" placeholder="Ej. Esquema de vacunas completo, al�rgico a cierto alimento..."></textarea>
                     </div>
 
                     <div class="form-section">
-                        <label for="notas">⚠️ Notas Adicionales</label>
+                        <label for="notas">?? Notas Adicionales</label>
                         <input type="text" id="notas" name="notas" placeholder="Ej. Responde al nombre o a silbidos">
                     </div>
                 </div>
             </div>
 
             <button type="submit" class="btn-submit">
-                ✨ Generar Ficha y Código QR
+                ? Generar Ficha y C�digo QR
             </button>
         </form>
 
         <div id="resultadoCard">
-            <h3>¡Ficha y Código QR Creados Exitosamente! 🎉</h3>
-            <p>Escanea o descarga este código QR para colocarlo en el collar:</p>
+            <h3>�Ficha y C�digo QR Creados Exitosamente! ??</h3>
+            <p>Escanea o descarga este c�digo QR para colocarlo en el collar:</p>
             
             <div class="qr-box">
                 <div id="qrCodeContainer"></div>
@@ -322,7 +322,7 @@
 
             <p>Enlace web asignado:</p>
             <div class="url-display" id="urlGenerada">https://...</div>
-            <a href="#" id="btnAbrirPerfil" target="_blank" class="btn-view">📱 Abrir Ficha Individual</a>
+            <a href="#" id="btnAbrirPerfil" target="_blank" class="btn-view">?? Abrir Ficha Individual</a>
         </div>
     </div>
 
@@ -341,7 +341,7 @@
             if (data.status === 'ok') {
                 const fullUrl = window.location.origin + data.url;
                 
-                // Limpiar QR previo si existía
+                // Limpiar QR previo si exist�a
                 document.getElementById('qrCodeContainer').innerHTML = '';
                 
                 // Generar el nuevo QR
@@ -359,7 +359,7 @@
                 document.getElementById('resultadoCard').style.display = 'block';
                 document.getElementById('resultadoCard').scrollIntoView({ behavior: 'smooth' });
             } else {
-                alert('Ocurrió un error al registrar en la base de datos: ' + (data.detalle || 'Intenta de nuevo.'));
+                alert('Ocurri� un error al registrar en la base de datos: ' + (data.detalle || 'Intenta de nuevo.'));
             }
         });
     </script>
