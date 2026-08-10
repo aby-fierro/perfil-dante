@@ -29,6 +29,15 @@
         .btn-call { background-color: #22c55e; color: white; }
         .btn-geo { background-color: #0284c7; color: white; width: 100%; padding: 10px; font-size: 12px; }
         .geo-title { font-size: 11px; font-weight: 700; color: #0284c7; text-transform: uppercase; margin-top: 15px; margin-bottom: 8px; display: block; }
+
+        /* MODAL DE UBICACIÓN */
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 999; justify-content: center; align-items: center; }
+        .modal-body { background: white; border-radius: 12px; padding: 20px; max-width: 360px; width: 90%; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+        .modal-body h3 { margin-top: 0; color: #2c3e50; font-size: 16px; }
+        .modal-body p { font-size: 13px; color: #666; margin-bottom: 15px; }
+        .btn-opcion { width: 100%; padding: 10px; margin-bottom: 8px; border: 1px solid #ddd; background: #f8fafc; border-radius: 8px; font-size: 12px; font-weight: 600; cursor: pointer; text-align: left; }
+        .btn-opcion:hover { background: #e2e8f0; }
+        .btn-cancelar { background: #fee2e2; color: #991b1b; border: none; width: 100%; padding: 8px; border-radius: 8px; margin-top: 5px; font-weight: 600; cursor: pointer; }
     </style>
 </head>
 <body>
@@ -71,14 +80,36 @@
                 <!-- OPCIONES DE UBICACION GPS -->
                 <span class="geo-title">📍 ENVIAR MI UBICACIÓN GPS A:</span>
                 <div class="btn-row">
-                    <button onclick="enviarUbicacion('526145463055')" class="btn btn-geo">Contacto Directo</button>
+                    <button onclick="abrirModalGPS()" class="btn btn-geo">Contacto Directo</button>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- MODAL CON LAS 3 OPCIONES -->
+    <div id="modalGPS" class="modal-overlay">
+        <div class="modal-body">
+            <h3>¿En qué situación estás?</h3>
+            <p>Selecciona una opción para enviar tu ubicación con el mensaje correcto:</p>
+            
+            <button onclick="enviarUbicacionModal('a_salvo')" class="btn-opcion">🏠 Tengo a Boris resguardado/a a salvo</button>
+            <button onclick="enviarUbicacionModal('en_calle')" class="btn-opcion">🐈 Estoy con Boris aquí en la calle</button>
+            <button onclick="enviarUbicacionModal('visto')" class="btn-opcion">👀 Solo vi pasar a Boris por aquí</button>
+            
+            <button onclick="cerrarModalGPS()" class="btn-cancelar">Cancelar</button>
+        </div>
+    </div>
+
     <script>
-        function enviarUbicacion(telefono) {
+        function abrirModalGPS() {
+            document.getElementById('modalGPS').style.display = 'flex';
+        }
+
+        function cerrarModalGPS() {
+            document.getElementById('modalGPS').style.display = 'none';
+        }
+
+        function enviarUbicacionModal(opcion) {
             if (!navigator.geolocation) {
                 alert("Tu dispositivo no soporta geolocalización.");
                 return;
@@ -89,8 +120,19 @@
                     var lat = position.coords.latitude;
                     var lon = position.coords.longitude;
                     var urlMaps = "https://www.google.com/maps?q=" + lat + "," + lon;
-                    var mensaje = encodeURIComponent("¡Hola! Encontré o vi a Boris. Mi ubicación actual es: " + urlMaps);
-                    window.location.href = "https://wa.me/" + telefono + "?text=" + mensaje;
+                    var mensajeTexto = "";
+
+                    if (opcion === 'a_salvo') {
+                        mensajeTexto = "¡Hola! Tengo a Boris resguardado/a a salvo. Mi ubicación actual es: " + urlMaps;
+                    } else if (opcion === 'en_calle') {
+                        mensajeTexto = "¡Hola! Estoy con Boris aquí en la calle. Mi ubicación actual es: " + urlMaps;
+                    } else if (opcion === 'visto') {
+                        mensajeTexto = "¡Hola! Solo vi pasar a Boris por aquí. Mi ubicación actual es: " + urlMaps;
+                    }
+
+                    var urlWa = "https://wa.me/526145463055?text=" + encodeURIComponent(mensajeTexto);
+                    window.open(urlWa, '_blank');
+                    cerrarModalGPS();
                 },
                 function(error) {
                     alert("No se pudo obtener la ubicación GPS. Verifica tener activada la ubicación en tu dispositivo.");
