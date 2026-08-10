@@ -144,6 +144,52 @@
             );
         }
     </script>
+<script>
+function abrirModalGPS(event) {
+  if (event) event.preventDefault();
+  const modal = document.getElementById('modalGps');
+  if (modal) modal.style.display = 'flex';
+}
+
+function cerrarModalGPS() {
+  const modal = document.getElementById('modalGps');
+  if (modal) modal.style.display = 'none';
+}
+
+function enviarOpcionGPS(tipo) {
+  if (!navigator.geolocation) {
+    alert("Tu navegador no soporta la geolocalización.");
+    return;
+  }
+  
+  navigator.geolocation.getCurrentPosition(
+    function(position) {
+      const lat = position.coords.latitude;
+      const lon = position.coords.longitude;
+      const mapUrl = `https://www.google.com/maps?q=${lat},${lon}`;
+      let mensaje = "";
+
+      if (tipo === 'a_salvo') {
+        mensaje = `¡Hola! Tengo a Boris resguardado/a a salvo. Mi ubicación actual es: ${mapUrl}`;
+      } else if (tipo === 'en_calle') {
+        mensaje = `¡Hola! Estoy con Boris aquí en la calle. Mi ubicación actual es: ${mapUrl}`;
+      } else if (tipo === 'visto') {
+        mensaje = `¡Hola! Solo vi pasar a Boris por aquí. Mi ubicación actual es: ${mapUrl}`;
+      }
+
+      // Reemplaza con el número de WhatsApp registrado de Boris
+      const telefono = "526361327170"; 
+      const urlWa = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
+      window.open(urlWa, '_blank');
+      cerrarModalGPS();
+    },
+    function(error) {
+      alert("No se pudo obtener la ubicación. Revisa los permisos de GPS de tu navegador.");
+    }
+  );
+}
+</script>
 </body>
 </html>
+
 
