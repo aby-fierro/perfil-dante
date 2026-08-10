@@ -72,7 +72,7 @@
                 <div class="contact-group">
                     <span class="contact-label">CONTACTO DIRECTO:</span>
                     <div class="btn-row">
-                        <a href="https://wa.me/526145463055?text=Hola,%20tengo%20informaci%C3%B3n%20sobre%20Boris" target="_blank" class="btn btn-ws">💬 WhatsApp</a>
+                        <a href="https://wa.me/526145463055?text=¡Hola!%20Tengo%20información%20sobre%20Boris,%20acabo%20de%20escanear%20su%20placa%20de%20TagMePet." target="_blank" class="btn btn-ws">💬 WhatsApp</a>
                         <a href="tel:6145463055" class="btn btn-call">📞 Llamar</a>
                     </div>
                 </div>
@@ -92,15 +92,18 @@
             <h3>¿En qué situación estás?</h3>
             <p>Selecciona una opción para enviar tu ubicación con el mensaje correcto:</p>
             
-            <button onclick="enviarUbicacionModal('a_salvo')" class="btn-opcion">🏠 Tengo a Boris resguardado/a a salvo</button>
-            <button onclick="enviarUbicacionModal('en_calle')" class="btn-opcion">🐈 Estoy con Boris aquí en la calle</button>
-            <button onclick="enviarUbicacionModal('visto')" class="btn-opcion">👀 Solo vi pasar a Boris por aquí</button>
+            <button onclick="enviarUbicacionModal(1)" class="btn-opcion">🏠 Tengo a Boris resguardado/a a salvo</button>
+            <button onclick="enviarUbicacionModal(2)" class="btn-opcion">🐈 Estoy con Boris aquí en la calle</button>
+            <button onclick="enviarUbicacionModal(3)" class="btn-opcion">👀 Solo vi pasar a Boris por aquí</button>
             
             <button onclick="cerrarModalGPS()" class="btn-cancelar">Cancelar</button>
         </div>
     </div>
 
     <script>
+        var nombreMascota = 'Boris';
+        var telefonoBoris = '526145463055';
+
         function abrirModalGPS() {
             document.getElementById('modalGPS').style.display = 'flex';
         }
@@ -110,6 +113,8 @@
         }
 
         function enviarUbicacionModal(opcion) {
+            cerrarModalGPS();
+
             if (!navigator.geolocation) {
                 alert("Tu dispositivo no soporta geolocalización.");
                 return;
@@ -122,17 +127,16 @@
                     var urlMaps = "https://www.google.com/maps?q=" + lat + "," + lon;
                     var mensajeTexto = "";
 
-                    if (opcion === 'a_salvo') {
-                        mensajeTexto = "¡Hola! Tengo a Boris resguardado/a a salvo. Mi ubicación actual es: " + urlMaps;
-                    } else if (opcion === 'en_calle') {
-                        mensajeTexto = "¡Hola! Estoy con Boris aquí en la calle. Mi ubicación actual es: " + urlMaps;
-                    } else if (opcion === 'visto') {
-                        mensajeTexto = "¡Hola! Solo vi pasar a Boris por aquí. Mi ubicación actual es: " + urlMaps;
+                    if (opcion === 1) {
+                        mensajeTexto = "¡Hola! Tengo a " + nombreMascota + " resguardada/o a salvo conmigo. Te comparto mi ubicación para el reencuentro: " + urlMaps;
+                    } else if (opcion === 2) {
+                        mensajeTexto = "¡Hola! Estoy con " + nombreMascota + " en este momento en la calle. Mi ubicación exacta es: " + urlMaps;
+                    } else {
+                        mensajeTexto = "¡Hola! Acabo de ver a " + nombreMascota + " por esta zona. Te comparto el punto exacto del avistamiento: " + urlMaps;
                     }
 
-                    var urlWa = "https://wa.me/526145463055?text=" + encodeURIComponent(mensajeTexto);
-                    window.open(urlWa, '_blank');
-                    cerrarModalGPS();
+                    var urlWa = "https://wa.me/" + telefonoBoris + "?text=" + encodeURIComponent(mensajeTexto);
+                    window.location.href = urlWa;
                 },
                 function(error) {
                     alert("No se pudo obtener la ubicación GPS. Verifica tener activada la ubicación en tu dispositivo.");
