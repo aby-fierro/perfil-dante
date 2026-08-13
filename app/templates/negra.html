@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mascota Perdida - Dante</title>
+    <title>Mascota Perdida - Negra</title>
     <style>
         * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body { background-color: #f0f2f5; margin: 0; padding: 20px 10px; display: flex; justify-content: center; }
@@ -45,67 +45,71 @@
         <div class="content">
             <div class="left-col">
                 <div class="profile-header">
-                    <img src="/static/dante.jpg" alt="Dante" class="avatar">
+                    <img src="/static/negra.jpg" alt="Negra" class="avatar">
                     <div>
-                        <h1 class="pet-name">Dante</h1>
+                        <h1 class="pet-name">Negra</h1>
                         <div class="address">📍 Vive en: Col. Tierra y Libertad, Anenecuilco #11</div>
                     </div>
                 </div>
 
                 <div class="section-title">COMPORTAMIENTO</div>
                 <div class="info-box">
-                    <p>Dante es un chihuahua gordito de casa y suele ser desconfiado con personas que no conoce. Cuando está fuera puede ponerse nervioso y ladrar o intentar defenderse si alguien se acerca demasiado rápido. Lo ideal es acercarse con calma y comunicarse con su familia.</p>
+                    <p>Negra es una perrita muy cariñosa, curiosa y activa. Le gusta explorar, olfatear y acercarse a las personas, aunque puede gruñir si alguien se aproxima de repente. Puede jugar mordiendo suavemente y no siempre se deja sujetar con facilidad. Es capaz de salir del patio si encuentra una oportunidad, por lo que se recomienda acercarse con calma y evitar perseguirla.</p>
                 </div>
 
                 <div class="section-title">SALUD Y ESTADO</div>
                 <div class="info-box health">
-                    <p>Está un poco gordito pero bien cuidado, cuenta con todas sus vacunas al día.</p>
+                    <p>Actualmente se encuentra bien cuidada y cuenta con una cama propia. No está esterilizada.</p>
                 </div>
             </div>
 
             <div class="right-col">
-                <h3 style="margin-top:0; color:#2c3e50; font-size:16px;">¿Lo encontraste o lo viste?</h3>
+                <h3 style="margin-top:0; color:#2c3e50; font-size:16px;">¿La encontraste o la viste?</h3>
                 <p style="font-size:12px; color:#666; margin-bottom:16px;">Comunícate directamente con su familia:</p>
 
+                <!-- CONTACTO PRINCIPAL (PAPA) -->
                 <div class="contact-group">
                     <span class="contact-label">CONTACTO PRINCIPAL:</span>
                     <div class="btn-row">
-                        <a href="https://wa.me/526272792334?text=¡Hola!%20Tengo%20información%20sobre%20Dante,%20acabo%20de%20escanear%20su%20placa%20de%20TagMePet." target="_blank" class="btn btn-ws">💬 WhatsApp</a>
-                        <a href="tel:6272792334" class="btn btn-call">📞 Llamar</a>
+                        <a href="https://wa.me/526271179634?text=¡Hola!%20Tengo%20información%20sobre%20Negra,%20acabo%20de%20escanear%20su%20placa%20de%20TagMePet." target="_blank" class="btn btn-ws">💬 WhatsApp</a>
+                        <a href="tel:6271179634" class="btn btn-call">📞 Llamar</a>
                     </div>
                 </div>
 
+                <!-- CONTACTO SECUNDARIO (MAMA) -->
                 <div class="contact-group">
                     <span class="contact-label">CONTACTO SECUNDARIO:</span>
                     <div class="btn-row">
-                        <a href="https://wa.me/526271310481?text=¡Hola!%20Tengo%20información%20sobre%20Dante,%20acabo%20de%20escanear%20su%20placa%20de%20TagMePet." target="_blank" class="btn btn-ws">💬 WhatsApp</a>
-                        <a href="tel:6271310481" class="btn btn-call">📞 Llamar</a>
+                        <a href="https://wa.me/526271392655?text=¡Hola!%20Tengo%20información%20sobre%20Negra,%20acabo%20de%20escanear%20su%20placa%20de%20TagMePet." target="_blank" class="btn btn-ws">💬 WhatsApp</a>
+                        <a href="tel:6271392655" class="btn btn-call">📞 Llamar</a>
                     </div>
                 </div>
 
+                <!-- OPCIONES DE UBICACION GPS -->
                 <span class="geo-title">📍 ENVIAR MI UBICACIÓN GPS A:</span>
                 <div class="btn-row" style="flex-direction: column;">
-                    <button onclick="abrirOpcionesGps('526272792334')" class="btn btn-geo">Contacto Principal</button>
-                    <button onclick="abrirOpcionesGps('526271310481')" class="btn btn-geo">Contacto Secundario</button>
+                    <button onclick="abrirOpcionesGps('526271179634')" class="btn btn-geo">Contacto Principal</button>
+                    <button onclick="abrirOpcionesGps('526271392655')" class="btn btn-geo">Contacto Secundario</button>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- MODAL SELECCION DE ESTADO DE UBICACION -->
     <div id="modalGps" class="modal-overlay">
         <div class="modal-box">
             <h4>¿En qué situación estás?</h4>
             <p>Selecciona una opción para enviar tu ubicación con el mensaje correcto:</p>
-            <button class="modal-btn" onclick="procesarEnvioGps(1)">🏠 Tengo a Dante resguardado/a a salvo</button>
-            <button class="modal-btn" onclick="procesarEnvioGps(2)">🐕 Estoy con Dante aquí en la calle</button>
-            <button class="modal-btn" onclick="procesarEnvioGps(3)">👀 Solo vi pasar a Dante por aquí</button>
+            <button class="modal-btn" onclick="procesarEnvioGps(1)">🏠 Tengo a Negra resguardada/o a salvo</button>
+            <button class="modal-btn" onclick="procesarEnvioGps(2)">🐕 Estoy con Negra aquí en la calle</button>
+            <button class="modal-btn" onclick="procesarEnvioGps(3)">👀 Solo vi pasar a Negra por aquí</button>
             <button class="modal-close" onclick="cerrarModalGps()">Cancelar</button>
         </div>
     </div>
 
     <script>
         var telefonoSeleccionado = '';
-        var nombreMascota = 'Dante';
+        var nombreMascota = 'Negra';
 
         function abrirOpcionesGps(telefono) {
             telefonoSeleccionado = telefono;
