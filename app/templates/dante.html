@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mascota Perdida - Dante</title>
+    <title>Mascotas de la Familia - TagMePet</title>
     <style>
         * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background-color: #f0f2f5; margin: 0; padding: 20px 10px; display: flex; justify-content: center; }
+        body { background-color: #f0f2f5; margin: 0; padding: 20px 10px; display: flex; flex-direction: column; align-items: center; gap: 20px; }
         .card { background: white; max-width: 800px; width: 100%; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
         .banner { background-color: #ef4444; color: white; text-align: center; padding: 12px; font-weight: bold; letter-spacing: 1px; font-size: 14px; text-transform: uppercase; }
         .content { padding: 24px; display: flex; flex-wrap: wrap; gap: 24px; }
@@ -30,7 +30,6 @@
         .btn-geo { background-color: #e53e3e; color: white; width: 100%; padding: 10px; font-size: 12px; }
         .geo-title { font-size: 11px; font-weight: 700; color: #e53e3e; text-transform: uppercase; margin-top: 15px; margin-bottom: 8px; display: block; }
 
-        /* Modal de Estado GPS */
         .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); justify-content: center; align-items: center; z-index: 1000; padding: 15px; }
         .modal-box { background: white; padding: 20px; border-radius: 12px; max-width: 400px; width: 100%; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
         .modal-box h4 { margin: 0 0 10px 0; color: #2c3e50; font-size: 16px; }
@@ -41,6 +40,8 @@
     </style>
 </head>
 <body>
+
+    <!-- TARJETA 1: DANTE -->
     <div class="card">
         <div class="banner">🚨 MASCOTA PERDIDA - REQUIERE AYUDA 🚨</div>
         <div class="content">
@@ -68,7 +69,6 @@
                 <h3 style="margin-top:0; color:#2c3e50; font-size:16px;">¿Lo encontraste o lo viste?</h3>
                 <p style="font-size:12px; color:#666; margin-bottom:16px;">Comunícate directamente con su familia:</p>
 
-                <!-- CONTACTO PRINCIPAL -->
                 <div class="contact-group">
                     <span class="contact-label">CONTACTO PRINCIPAL:</span>
                     <div class="btn-row">
@@ -77,7 +77,6 @@
                     </div>
                 </div>
 
-                <!-- CONTACTO SECUNDARIO -->
                 <div class="contact-group">
                     <span class="contact-label">CONTACTO SECUNDARIO:</span>
                     <div class="btn-row">
@@ -86,11 +85,63 @@
                     </div>
                 </div>
 
-                <!-- OPCIONES DE UBICACION GPS -->
                 <span class="geo-title">📍 ENVIAR MI UBICACIÓN GPS A:</span>
                 <div class="btn-row" style="flex-direction: column;">
-                    <button onclick="abrirOpcionesGps('526272792334')" class="btn btn-geo">Contacto Principal</button>
-                    <button onclick="abrirOpcionesGps('526271310481')" class="btn btn-geo">Contacto Secundario</button>
+                    <button onclick="abrirOpcionesGps('526272792334', 'Dante')" class="btn btn-geo">Contacto Principal</button>
+                    <button onclick="abrirOpcionesGps('526271310481', 'Dante')" class="btn btn-geo">Contacto Secundario</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TARJETA 2: NEGRA -->
+    <div class="card">
+        <div class="banner">🚨 MASCOTA PERDIDA - REQUIERE AYUDA 🚨</div>
+        <div class="content">
+            <div class="left-col">
+                <div class="profile-header">
+                    <img src="/static/negra.jpg" alt="Negra" class="avatar">
+                    <div>
+                        <h1 class="pet-name">Negra</h1>
+                        <div class="address">📍 Vive en: Col. Tierra y Libertad, Anenecuilco #11</div>
+                    </div>
+                </div>
+
+                <div class="section-title">COMPORTAMIENTO</div>
+                <div class="info-box">
+                    <p>Negra es una perrita muy cariñosa, curiosa y activa. Le gusta explorar y acercarse a las personas, pero puede gruñir si te le aproximas de golpe. Puede jugar morder suavemente y no siempre se deja sujetar. Puede escaparse si halla oportunidad; por favor acércate con calma sin perseguirla.</p>
+                </div>
+
+                <div class="section-title">SALUD Y ESTADO</div>
+                <div class="info-box health">
+                    <p>Se encuentra bien cuidada. No está esterilizada.</p>
+                </div>
+            </div>
+
+            <div class="right-col">
+                <h3 style="margin-top:0; color:#2c3e50; font-size:16px;">¿La encontraste o la viste?</h3>
+                <p style="font-size:12px; color:#666; margin-bottom:16px;">Comunícate directamente con su familia:</p>
+
+                <div class="contact-group">
+                    <span class="contact-label">CONTACTO PRINCIPAL:</span>
+                    <div class="btn-row">
+                        <a href="https://wa.me/526272792334?text=¡Hola!%20Tengo%20información%20sobre%20Negra,%20acabo%20de%20escanear%20su%20placa%20de%20TagMePet." target="_blank" class="btn btn-ws">💬 WhatsApp</a>
+                        <a href="tel:6272792334" class="btn btn-call">📞 Llamar</a>
+                    </div>
+                </div>
+
+                <div class="contact-group">
+                    <span class="contact-label">CONTACTO SECUNDARIO:</span>
+                    <div class="btn-row">
+                        <a href="https://wa.me/526271310481?text=¡Hola!%20Tengo%20información%20sobre%20Negra,%20acabo%20de%20escanear%20su%20placa%20de%20TagMePet." target="_blank" class="btn btn-ws">💬 WhatsApp</a>
+                        <a href="tel:6271310481" class="btn btn-call">📞 Llamar</a>
+                    </div>
+                </div>
+
+                <span class="geo-title">📍 ENVIAR MI UBICACIÓN GPS A:</span>
+                <div class="btn-row" style="flex-direction: column;">
+                    <button onclick="abrirOpcionesGps('526272792334', 'Negra')" class="btn btn-geo">Contacto Principal</button>
+                    <button onclick="abrirOpcionesGps('526271310481', 'Negra')" class="btn btn-geo">Contacto Secundario</button>
                 </div>
             </div>
         </div>
@@ -99,21 +150,23 @@
     <!-- MODAL SELECCION DE ESTADO DE UBICACION -->
     <div id="modalGps" class="modal-overlay">
         <div class="modal-box">
-            <h4>¿En qué situación estás?</h4>
+            <h4 id="modalTitulo">¿En qué situación estás?</h4>
             <p>Selecciona una opción para enviar tu ubicación con el mensaje correcto:</p>
-            <button class="modal-btn" onclick="procesarEnvioGps(1)">🏠 Tengo a Dante resguardado/a a salvo</button>
-            <button class="modal-btn" onclick="procesarEnvioGps(2)">🐕 Estoy con Dante aquí en la calle</button>
-            <button class="modal-btn" onclick="procesarEnvioGps(3)">👀 Solo vi pasar a Dante por aquí</button>
+            <button class="modal-btn" onclick="procesarEnvioGps(1)">🏠 Tengo a la mascota resguardada a salvo</button>
+            <button class="modal-btn" onclick="procesarEnvioGps(2)">🐕 Estoy con la mascota aquí en la calle</button>
+            <button class="modal-btn" onclick="procesarEnvioGps(3)">👀 Solo vi pasar a la mascota por aquí</button>
             <button class="modal-close" onclick="cerrarModalGps()">Cancelar</button>
         </div>
     </div>
 
     <script>
         var telefonoSeleccionado = '';
-        var nombreMascota = 'Dante';
+        var nombreMascotaActual = '';
 
-        function abrirOpcionesGps(telefono) {
+        function abrirOpcionesGps(telefono, nombre) {
             telefonoSeleccionado = telefono;
+            nombreMascotaActual = nombre;
+            document.getElementById('modalTitulo').innerText = '¿En qué situación estás con ' + nombre + '?';
             document.getElementById('modalGps').style.display = 'flex';
         }
 
@@ -137,11 +190,11 @@
                     var mensajeTexto = "";
 
                     if (opcion === 1) {
-                        mensajeTexto = "¡Hola! Tengo a " + nombreMascota + " resguardada/o a salvo conmigo. Te comparto mi ubicación para el reencuentro: " + urlMaps;
+                        mensajeTexto = "¡Hola! Tengo a " + nombreMascotaActual + " resguardada/o a salvo conmigo. Te comparto mi ubicación para el reencuentro: " + urlMaps;
                     } else if (opcion === 2) {
-                        mensajeTexto = "¡Hola! Estoy con " + nombreMascota + " en este momento en la calle. Mi ubicación exacta es: " + urlMaps;
+                        mensajeTexto = "¡Hola! Estoy con " + nombreMascotaActual + " en este momento en la calle. Mi ubicación exacta es: " + urlMaps;
                     } else {
-                        mensajeTexto = "¡Hola! Acabo de ver a " + nombreMascota + " por esta zona. Te comparto el punto exacto del avistamiento: " + urlMaps;
+                        mensajeTexto = "¡Hola! Acabo de ver a " + nombreMascotaActual + " por esta zona. Te comparto el punto exacto del avistamiento: " + urlMaps;
                     }
 
                     var mensajeEncoded = encodeURIComponent(mensajeTexto);
