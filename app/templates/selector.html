@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TagMePet - Selección de Mascota</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            padding: 30px 20px;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+        .alert-badge {
+            background-color: #ffebe9;
+            color: #d93025;
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-bottom: 20px;
+            border: 1px solid #ffc1c0;
+        }
+        h1 {
+            color: #2c3e50;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        p {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 25px;
+        }
+        .btn-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .pet-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background-color: #ffffff;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 15px 20px;
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .pet-btn:hover {
+            border-color: #3498db;
+            background-color: #f0f7fc;
+            transform: translateY(-2px);
+        }
+        .footer-text {
+            margin-top: 25px;
+            font-size: 0.8rem;
+            color: #aaa;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="alert-badge">🚨 PLACA DETECTADA</div>
+        <h1>¿A quién encontraste?</h1>
+        <p>Este código está asignado a dos perritos de la misma familia. Selecciona a cuál de los dos estás viendo:</p>
+        
+        <div class="btn-container">
+            <a href="/p/dante-perfil" class="pet-btn">
+                🐶 Perfil de Dante
+            </a>
+            <a href="/p/negra" class="pet-btn">
+                🐶 Perfil de Negra
+            </a>
+        </div>
+
+        <div class="footer-text">
+            TagMePet - Sistema de Recuperación de Mascotas
+        </div>
+    </div>
+</body>
+</html>

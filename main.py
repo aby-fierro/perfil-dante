@@ -85,19 +85,29 @@ async def inicio():
     return RedirectResponse(url="/registro")
 
 
+# --- RUTA QUE ABRE EL QR FISICO (SELECTOR) ---
 @app.get("/p/dante", response_class=HTMLResponse)
 @app.get("/p/dante/", response_class=HTMLResponse)
 @app.get("/p/dante123", response_class=HTMLResponse)
+async def ver_selector(request: Request):
+    return templates.TemplateResponse(request=request, name="selector.html")
+
+
+# --- PERFIL INDIVIDUAL DE DANTE ---
+@app.get("/p/dante-perfil", response_class=HTMLResponse)
+@app.get("/p/dante-perfil/", response_class=HTMLResponse)
 async def ver_dante(request: Request):
     return templates.TemplateResponse(request=request, name="dante.html")
 
 
+# --- PERFIL INDIVIDUAL DE NEGRA ---
 @app.get("/p/negra", response_class=HTMLResponse)
 @app.get("/p/negra/", response_class=HTMLResponse)
 async def ver_negra(request: Request):
     return templates.TemplateResponse(request=request, name="negra.html")
 
 
+# --- PERFIL INDIVIDUAL DE BORIS ---
 @app.get("/p/boris", response_class=HTMLResponse)
 @app.get("/p/boris/", response_class=HTMLResponse)
 async def ver_boris(request: Request):
