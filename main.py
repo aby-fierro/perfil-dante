@@ -92,6 +92,12 @@ async def ver_dante(request: Request):
     return templates.TemplateResponse(request=request, name="dante.html")
 
 
+@app.get("/p/negra", response_class=HTMLResponse)
+@app.get("/p/negra/", response_class=HTMLResponse)
+async def ver_negra(request: Request):
+    return templates.TemplateResponse(request=request, name="negra.html")
+
+
 @app.get("/p/boris", response_class=HTMLResponse)
 @app.get("/p/boris/", response_class=HTMLResponse)
 async def ver_boris(request: Request):
